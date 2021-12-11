@@ -10,9 +10,13 @@ from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
 
+# Import Anweisungen für interne Klassen & Files
+from INT_Classes import *
+
+
+
 m_datum_von = ''
 m_datum_bis = ''
-# Test von Karsten
 
 def button_action():
 
