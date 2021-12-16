@@ -50,11 +50,6 @@ k_t_max = 100,0
 k_t_min = -100,0
 t_max = k_t_max
 t_min = k_t_min
-v_id = []
-v_datum = []
-v_zeit = []
-v_wert = []
-v_zeile = []
 erg_id = []
 erg_datum = []
 erg_zeit = []
@@ -66,16 +61,6 @@ erg_stat1 = []     #np.empty([0,4])  #ID, Datum, Zeit, Temperatur
 for mwd in res_data:
       if ([mwd[2]] == aktval):
             continue        # gleiche Werte überspringen
-      #v_id = [mwd[0]]
-      #v_datum = [mwd[1]]
-      #v_zeit  = [mwd[1]]
-      #v_wert = [mwd[2]]
-      #erg_id.append(v_id)
-      #erg_datum.append(v_datum) 
-      #erg_zeit.append(v_zeit)
-      #erg_wert.append(v_wert)
-      #aktval = [mwd[2]]
-      
       erg_id.append(getVal([mwd[0]]))
       erg_datum.append(getVal([mwd[1]])) 
       erg_zeit.append(getVal([mwd[1]]))
