@@ -1,3 +1,6 @@
+from SQL_Tools import *
+
+
 # Externe Parameter, welche beim Aufruf übergeben werden
 class ext_params() :
     pass; 
@@ -25,6 +28,10 @@ class tools() :
         return 20
     
 
-# Aufruf der Systeminitialisierung
+# Aufruf der Systeminitialisierung. Hat alles funktioniert, wird True zurückgeliefert, bei Fehlern FALS
 def SystemInit() :
+    connect_database()
     return True
+
+def getVal(var1):
+    return var1

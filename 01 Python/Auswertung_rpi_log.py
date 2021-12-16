@@ -12,6 +12,7 @@ from PIL import Image, ImageTk
 
 # Import Anweisungen für interne Klassen & Files
 from INT_Classes import *
+from SQL_Tools import *
 
 
 
@@ -136,7 +137,7 @@ i_fenster = tk.Tk()
 i_fenster.title('Eingaben für die Auswertungsgrafik')
 i_fenster.geometry('1210x570+10+10')
 
-arbeits_pfad = os.getenv('HOME') + '/Entwicklung/Decarbonara_GIT/'
+arbeits_pfad = os.getenv('HOME') + '/Alles/Kunden/Decarbonara/01 Workspace_GIT/01 Python'
 os.chdir(arbeits_pfad)
 
 l_eckdaten = Label(i_fenster, text="Eckdaten", anchor='w', font=('Arial', 18)).place(x=20, y=50, width=100, height=24)
