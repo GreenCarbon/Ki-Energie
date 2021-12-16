@@ -14,6 +14,9 @@ from INT_Classes import *
 # Import Anweisungen für interne Klassen & Files
 from SQL_Tools import *
 
+
+
+
 SystemInit()
 con = db_conn()
 
@@ -23,8 +26,16 @@ p_etage = "KG"
 p_raum = "Arbeitszimmer"
 p_sensorklasse = "KG_AZ_TS001"
 p_name_des_wertes = "ACTUAL_TEMPERATURE"
+
 sql_datum_von = "2021-11-14 00:00:00"
 sql_datum_bis = "2021-11-16 00:00:00"
+
+# Schreiben eines statistischen Records
+def write_stat_rec(Id1, Id2, From_Datum, From_Zeit, To_Datum, To_Zeit, Start_val, Ende_val):
+      print("Start: ", Id1, " | Ende: ", Id2, " | Von: ", From_Datum, " " , To_Zeit, " | Temperatur von : ", Start_val , " bis : " , Ende_val)
+      return
+
+############ Einstieg Hauptprogramm
 
 # Ergebnistabelle aufbauen
 sql_anweisung = """SELECT Id,log_datum_vom, wert_num FROM import_messwerte 
@@ -50,29 +61,96 @@ k_t_max = 100,0
 k_t_min = -100,0
 t_max = k_t_max
 t_min = k_t_min
-erg_id = []
-erg_datum = []
-erg_zeit = []
-erg_wert = []
+sel1_id = []
+sel1_datum = []
+sel1_zeit = []
+sel1_wert = []
 aktval = 99999
-erg_stat1 = []     #np.empty([0,4])  #ID, Datum, Zeit, Temperatur
+sel1_stat1 = []     #np.empty([0,4])  #ID, Datum, Zeit, Temperatur
 
 #print(res_data)
 for mwd in res_data:
       if ([mwd[2]] == aktval):
             continue        # gleiche Werte überspringen
-      erg_id.append(getVal([mwd[0]]))
-      erg_datum.append(getVal([mwd[1]])) 
-      erg_zeit.append(getVal([mwd[1]]))
-      erg_wert.append(getVal([mwd[2]]))
+      sel1_id.append(getVal([mwd[0]]))
+      sel1_datum.append(getVal([mwd[1]])) 
+      sel1_zeit.append(getVal([mwd[1]]))
+      sel1_wert.append(getVal([mwd[2]]))
       aktval = getVal([mwd[2]])
-print(erg_id)
+#print(sel1_id)
 
 # Am Ende im Array folgende Werte ermitten
 #     + handelt es sich um eine Aufheiz- nzw. Abkühlphase oder um eine Plateau-Phase (obere oder untere Temperatur)
 #     + die mittlere Aufheiz- - bzw. Abkühlgeschwindigkeit jeder einzelnen Phase 
 #     + die höchste und niedrigste Aufheiz- bz. Abkühlgeschwindigkeit jeder Phase
-
+i = 0
+going_up = True
+going_down = False
+upper_Plateau = True
+lower_Plateau = False
+sel2_stat = []
+high_value = -100
+low_value = 100
+start_value = 100
+from_Id = 0
+from_datum = "*START"
+from_zeit = "*START"
+i = 1
+# Nur wenn es mehr als einen Wert gibt, dann entsprechend der ersten beiden Werte alles belegen 
+if (len(sel1_id) > 1):
+      from_Id = sel1_id[0]
+      low_value = sel1_wert[0]
+      start_value = sel1_wert[0]
+      high_value = sel1_wert[0]
+      from_datum = sel1_datum[0]
+      from_zeit = sel1_zeit[0]
+      if (sel1_wert[1] < sel1_wert[0]):
+            going_down = True
+            going_up = False
+            
+            
+# Duchgehen der Werte ab der zweiten Zeile (i=1)
+i = 0     
+print("Gesamtanzahl Werte = ", len(sel1_id))       
+while i < len(sel1_id) :
+      i+=1
+      
+      if ((i + 2) == len(sel1_id)):      # Letzte zeile erreicht   
+            write_stat_rec(from_Id, sel1_id[i], from_datum, from_zeit, sel1_datum[i], sel1_zeit[i], start_value, sel1_wert[i])    
+            break    
+      print("Werte: ", sel1_wert[i-1], " / " , sel1_wert[i])
+     
+      if (going_up and sel1_wert[i] > sel1_wert[i-1]):  # Weiter steigend
+            high_value = sel1_wert[i]
+            continue
+         
+      if (going_down and sel1_wert[i] < sel1_wert[i-1]):  # Weiter fallend
+            low_value = sel1_wert[i]      
+            continue
+      
+      if (going_up and sel1_wert[i] < sel1_wert[i-1]):  # Wechsel von steigend nach fallend
+            write_stat_rec(from_Id, sel1_id[i], from_datum, from_zeit, sel1_datum[i], sel1_zeit[i], start_value, sel1_wert[i])
+            start_value = sel1_wert[i]
+            high_value = sel1_wert[i]
+            from_Id = sel1_id[i]
+            from_datum = sel1_datum[i]
+            from_zeit = sel1_zeit[i]
+            going_down = True
+            going_up = False
+            continue
+            
+      if (going_down and sel1_wert[i] > sel1_wert[i-1]):  # Wechsel von fallend nach steigend
+            write_stat_rec(from_Id, sel1_id[i], from_datum, from_zeit, sel1_datum[i], sel1_zeit[i], start_value, sel1_wert[i])
+            start_value = sel1_wert[i]
+            low_value = sel1_wert[i]
+            from_Id = sel1_id[i]
+            from_datum = sel1_datum[i]
+            from_zeit = sel1_zeit[i]
+            going_up = True
+            going_down =False
+            continue
+            
+      
 
 # Aus den Phasen dann am Ende ermitteln
 #     + Höchste Temperatur insgesamt ID, Wert und Zeit)
@@ -80,3 +158,4 @@ print(erg_id)
 #     + mittlere Aufheiz- und Abkühlgeschwindigkeit über alles
 #     + mittlere obere und untere Temperatur
 #     + Schwankung obere und untere Plateauphase (eigentlich ist nur die obere wichtig)
+
