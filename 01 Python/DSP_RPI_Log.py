@@ -15,6 +15,7 @@ from INT_Classes import *
 from SQL_Tools import *
 
 
+SystemInit()
 
 m_datum_von = ''
 m_datum_bis = ''
@@ -42,6 +43,8 @@ def button_action():
         n_grafik = ImageTk.PhotoImage(Image.open(x_grafik))
         l_grafik .configure(image=n_grafik)
         l_grafik.image = n_grafik
+        l_grafik.place(x=530, y=50)
+        i_fenster.geometry('1210x570+10+10')
 
         #i_fenster.destroy()
 
@@ -97,6 +100,8 @@ def graf_erzeugen(p_server_name, p_etage, p_raum, p_sensorklasse, p_name_des_wer
         m_datum_von = p_datum_von
         m_datum_bis = p_datum_bis
         plt.clf()
+        i_fenster.geometry('510x570+10+10')
+
         
     plt.plot(xwerte, ywerte) #, color='green', marker='o', linestyle='dashed', linewidth=2, markersize=12)
     #plt.bar(xwerte, ywerte)
@@ -104,7 +109,7 @@ def graf_erzeugen(p_server_name, p_etage, p_raum, p_sensorklasse, p_name_des_wer
     plt.ylabel('Temperatur')
     s_grafik = aktuelle_zeit + '_' + p_server_name + '_' + p_etage + '_' + p_raum + '.png'
     #plt.figure()
-    plt.savefig(s_grafik)
+    #plt.savefig(s_grafik)
     #plt.show()
     
     return s_grafik
@@ -126,18 +131,15 @@ def db_select(p_sql_anweisung, p_sql_werte, p_sql_tabelle):
 
 aktuelle_zeit = datetime.now().strftime('%Y%m%d-%H%M%S')  # Format = 20211109-131856
 
-db_verbindung = mysql.connector.connect(database='DeCarbonara',
-                                            user='root',
-                                        password='DeCarbonaras#2021') 
-                                       #password=getpass("Enter password: "))
+db_verbindung = db_conn()
 cursor = db_verbindung.cursor()
-
 
 i_fenster = tk.Tk()
 i_fenster.title('Eingaben für die Auswertungsgrafik')
-i_fenster.geometry('1210x570+10+10')
+i_fenster.geometry('510x570+10+10')
 
-arbeits_pfad = os.getenv('HOME') + '/Alles/Kunden/Decarbonara/01 Workspace_GIT/01 Python'
+#arbeits_pfad = os.getenv('HOME') + '/Alles/Kunden/Decarbonara/01 Workspace_GIT/01 Python'
+arbeits_pfad = os.path.abspath(os.getcwd()) + '/01 Python'
 os.chdir(arbeits_pfad)
 
 l_eckdaten = Label(i_fenster, text="Eckdaten", anchor='w', font=('Arial', 18)).place(x=20, y=50, width=100, height=24)
@@ -152,11 +154,11 @@ l_zeitraum_von = Label(i_fenster, text="Datum von: ", anchor='w').place(x=20, y=
 l_zeitraum_bis = Label(i_fenster, text="Datum bis: ", anchor='w').place(x=20, y=350, width=100, height=24)
 
 fehler = tk.StringVar()
-l_fehlerzeile = Label(i_fenster, text="hier", fg='red', textvariable=fehler, anchor='w').place(x=20, y=480, width=400, height=24)
+l_fehlerzeile = Label(i_fenster, text="Fehlerblock", fg='red', textvariable=fehler, anchor='w').place(x=20, y=480, width=400, height=24)
 
-s_grafik= ImageTk.PhotoImage(Image.open("leer_grafik.png"))
+s_grafik = ImageTk.PhotoImage(Image.open("DSP_leer.png"))
 l_grafik = Label(i_fenster, image=s_grafik)
-l_grafik.place(x=530, y=50)
+#l_grafik.place(x=530, y=50)
 
 p1 = tk.StringVar()
 cb_server_name = ttk.Combobox(i_fenster, width=20, height=25, textvariable=p1)
