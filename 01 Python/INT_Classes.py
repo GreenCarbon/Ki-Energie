@@ -3,6 +3,7 @@ from SQL_Tools import *
 from configparser import ConfigParser
 import logging 
 
+config = ""
 
 # Externe Parameter, welche beim Aufruf übergeben werden
 class ext_params() :
@@ -42,6 +43,7 @@ def getVal(var1):
 
 
 def parseConfig(cfgFile):
+    global config
     config = ConfigParser()
     print (config.read(cfgFile))
   
@@ -54,6 +56,10 @@ def parseConfig(cfgFile):
                 print(sec, " ", key, " " , config[sec][key])
             except:
                 pass
+            
+def getConfigParam(p_Section, p_Key):
+    global config
+    return    config[p_Section][p_Key]         
     
 def initLogger(name):
 # Logger Config Beispiele:
@@ -75,8 +81,8 @@ def initLogger(name):
     #logger.setLevel(logging.DEBUG)
     #logger.addHandler(handler)
     #return logger
-        
-    logging.basicConfig(filename='Log.txt',
+    logfile = getConfigParam('LOG', 'logfile')    
+    logging.basicConfig(filename=logfile,
                             filemode='a',
                             format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
                             datefmt='%H:%M:%S',
