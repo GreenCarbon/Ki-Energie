@@ -13,6 +13,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
+import logging 
 
 # Import Anweisungen für interne Klassen & Files
 from INT_Classes import *

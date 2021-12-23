@@ -8,6 +8,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
+import logging 
 
 # Import Anweisungen für interne Klassen & Files
 from INT_Classes import *
@@ -15,9 +16,8 @@ from INT_Classes import *
 from SQL_Tools import *
 
 
-
-
 SystemInit()
+logger = initLogger('root')
 con = db_conn()
 
 # Diese Werte sind vorerst statisch zum Testen. Später noch aus den Eingaben füllen
@@ -47,6 +47,7 @@ def write_stat_rec(Id1, Id2, From_Datum, From_Time, To_Datum, To_Time, Start_val
             
       except mysql.connector.Error as error:
             print("Fehler beim Schreiben in die AUW_StatKurven: {}".format(error))
+            logging.error("Fehler beim Schreiben in die AUW_StatKurven: {}".format(error))
 
       return
 

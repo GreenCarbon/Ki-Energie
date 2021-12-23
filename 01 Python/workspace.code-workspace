@@ -1,6 +1,10 @@
 {
 	"folders": [
 		{
+			"path": "../../../Decarbonara_Git/Decarbonara/Python"
+		},
+		{
+			"name": "01 Workspace_GIT",
 			"path": ".."
 		}
 	],
