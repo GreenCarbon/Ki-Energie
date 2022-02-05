@@ -44,40 +44,40 @@ class Temperatur_Sensor():
     __IP_Addr = "192.168.20.201"
     __Port = "2710"
     
-    def __init__():
-        pass
+    #def __init__(self):
+    #    pass
     
-    def getCurrentTemperatur():
+    def getCurrentTemperatur(self):
+        response = requests.get('http://192.168.20.205/config/xmlapi/state.cgi?datapoint_id=1679')
         temperatur = 21,2
-        return temperatur;
+        return response;
     
-    def getCurrentVentil():
+    def getCurrentVentil(self):
         ventil = 50
         return ventil
     
-    def isSensorActive():
+    def isSensorActive(self):
         return True
     
 class Temperatur_Aktor():   
-    def __init__():
-        pass
+    #def __init__(self):
+    #    pass
     
  # Am Ausgang für den Aktor die gewünschte Solltemperatur einstellen   
-    def set_Ausgang_Temp(p_Temperatur):
+    def set_Ausgang_Temp(self, p_Temperatur):
+        response = requests.get('http://192.168.20.201:2710/data/status', auth=HTTPDigestAuth('Karsten', 'Only4#Winners'))
+        print(response)
         pass
     
  # Am Ausgang für den Aktor die Ventilstellung in % einstellen. 
  # 0 = geschlossen, 100 / komplett offen   
-    def set_Ausgang_Ventil(p_Prozent):
+    def set_Ausgang_Ventil(self, p_Prozent):
         pass
         
-    def isAktorActive():
+    def isAktorActive(self):
         return True    
     
  # START <<<<<<<<
  
 
-    setLogger()
-    response = requests.get('http://192.168.20.201:2710/data/status', auth=HTTPDigestAuth('Karsten', 'Only4#Winners'))
-    print(response)
         

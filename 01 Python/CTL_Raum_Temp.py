@@ -14,11 +14,25 @@ from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
 import logging 
+from EXT_Kommunikation import *
 
 # Import Anweisungen für interne Klassen & Files
 from INT_Classes import *
 # Import Anweisungen für interne Klassen & Files
 from SQL_Tools import *
+
+SystemInit()
+logger = initLogger('root')
+con = db_conn()
+
+S_temp = Temperatur_Sensor()
+xx = S_temp.getCurrentTemperatur()
+logging.error(xx)
+#A_temp = Temperatur_Aktor()
+#A_temp.set_Ausgang_Temp(21)
+
+
+
 
 class Control_Raum_Temp() :
     __server = ''

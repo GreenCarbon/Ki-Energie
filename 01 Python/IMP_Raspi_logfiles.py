@@ -3,6 +3,10 @@ import mysql.connector
 import os
 from glob import glob
 from datetime import datetime
+from INT_Classes import *
+import codecs
+
+
 
 # --- Routine verarbeitet die einzelnen Zeilen
 # --- 1. Inhalt prüfen und bei Fehler ins fehler_log schreiben
@@ -12,13 +16,14 @@ def insert_log_zeile(zeile, p_datei, p_satznummer, anzahl_fehler):
     kein_fehler_gefunden = True
 
     zeile_ary = []
-    zeile_ary = zeile.split('|')
+    str_zeile = zeile.decode().replace(';','|')
+    zeile_ary = str_zeile.split('|')
     l_log_satzart = zeile_ary[1]
 
     if l_log_satzart == 'MESSWERT':
-        kein_fehler_gefunden = insert_log_zeile_messwert(zeile, p_datei, p_satznummer, anzahl_fehler)
+        kein_fehler_gefunden = insert_log_zeile_messwert(str_zeile, p_datei, p_satznummer, anzahl_fehler)
     elif l_log_satzart == 'CONFIG':
-        kein_fehler_gefunden = insert_log_zeile_config(zeile, p_datei, p_satznummer, anzahl_fehler)
+        kein_fehler_gefunden = insert_log_zeile_config(str_zeile, p_datei, p_satznummer)
     else:
         kein_fehler_gefunden = False
 
@@ -30,6 +35,11 @@ def insert_log_zeile_messwert(zeile, p_datei, p_satznummer, anzahl_fehler):
 
     zeile_ary = []
     zeile_ary = zeile.split('|')
+    if len(zeile_ary) < 10: 
+        print("Zeile enthält keine 9 Felder :" , zeile)
+        kein_fehler_gefunden = False
+        return kein_fehler_gefunden
+    
     l_log_datum_vom = zeile_ary[0]
     l_server_name = zeile_ary[2]
     l_etage = zeile_ary[3]
@@ -140,7 +150,7 @@ def archiv_logdatei(p_log_pfad, p_log_extension, p_log_verarbeitet):
 
 
 # --- Beginn des Hauptprogramms ---
-
+SystemInit()
 aktuelle_zeit = datetime.now().strftime('%Y%m%d-%H%M%S')  
                             # Format = 20211109-131856
 log_pfad = os.getenv('HOME') + '/Entwicklung/LogFiles/'
@@ -151,7 +161,8 @@ anzahl_saetze = 0
 anzahl_fehler = 0
 v_dateiname = None 
 
-os.chdir(log_pfad)
+#os.chdir(log_pfad)
+os.chdir(getConfigParam("ENVIRONMENT", "datafiles"))
 log_dateien = sorted(glob(log_datei), key=os.path.basename)
 
 db_verbindung = mysql.connector.connect(database='DeCarbonara',
@@ -163,7 +174,8 @@ cursor = db_verbindung.cursor()
 
 
 for dateien in log_dateien:
-    datei = open(f'{dateien}', 'r')
+    datei = open(f'{dateien}', 'rb')
+    #datei = codecs.open(f'{dateien}', 'r', encoding="ascii", errors="surrogateescape")
     # - mit dem Beginn einer neuen Datei wird der Satzzähler auf 0 zurückgesetzt
     if v_dateiname is not datei.name:
         v_dateiname = datei.name
@@ -171,9 +183,10 @@ for dateien in log_dateien:
         anzahl_dateien += 1
 
     for zeile in datei:
+        zeile_str = zeile.decode('unicode_escape').encode('utf-8')
         satznummer += 1
         anzahl_saetze += 1
-        kein_fehler_gefunden = insert_log_zeile(zeile, datei.name, satznummer, anzahl_fehler)
+        kein_fehler_gefunden = insert_log_zeile(zeile_str, datei.name, satznummer, anzahl_fehler)
 
 if db_verbindung.is_connected():
    cursor.close()
