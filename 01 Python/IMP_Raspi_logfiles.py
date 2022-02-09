@@ -153,7 +153,8 @@ def archiv_logdatei(p_log_pfad, p_log_extension, p_log_verarbeitet):
 SystemInit()
 aktuelle_zeit = datetime.now().strftime('%Y%m%d-%H%M%S')  
                             # Format = 20211109-131856
-log_pfad = os.getenv('HOME') + '/Entwicklung/LogFiles/'
+#log_pfad = os.getenv('HOME') + '/Entwicklung/LogFiles/'
+log_pfad=getConfigParam("ENVIRONMENT", "datafiles")
 log_datei = 'devlog*'
 satznummer = 0
 anzahl_dateien = 0
