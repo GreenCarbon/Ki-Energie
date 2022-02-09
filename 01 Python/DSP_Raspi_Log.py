@@ -1,22 +1,31 @@
 #from typing import Collection
+#from _typeshed import Self
 from time import strptime
 import mysql.connector
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
+#import matplotlib
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg #, NavigationToolbar2Tk
 #import numpy as np
 import os
 from datetime import *
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+<<<<<<< HEAD:01 Python/DSP_RPI_Log.py
 from PIL import Image, ImageTk
 import logging 
 
+=======
+#from PIL import Image, ImageTk
+ 
+>>>>>>> baed8ac (div. ältere Änderungen):01 Python/DSP_Raspi_Log.py
 # Import Anweisungen für interne Klassen & Files
 from INT_Classes import *
 from SQL_Tools import *
 
-
 SystemInit()
+con = db_conn()
 
 m_datum_von = ''
 m_datum_bis = ''
@@ -40,12 +49,13 @@ def button_action():
     elif p_raum == '':
         fehler.set('Bitte wählen Sie einen gültigen Raum aus.')
     else:
-        x_grafik = graf_erzeugen(p_server_name, p_etage, p_raum, p_sensorklasse, p_name_des_wertes, p_datum_von, p_datum_bis)
-        n_grafik = ImageTk.PhotoImage(Image.open(x_grafik))
-        l_grafik .configure(image=n_grafik)
-        l_grafik.image = n_grafik
-        l_grafik.place(x=530, y=50)
-        i_fenster.geometry('1210x570+10+10')
+        #x_grafik = 
+        graf_erzeugen(p_server_name, p_etage, p_raum, p_sensorklasse, p_name_des_wertes, p_datum_von, p_datum_bis)
+        #n_grafik = ImageTk.PhotoImage(Image.open(x_grafik))
+        #l_grafik .configure(image=n_grafik)
+        #l_grafik.image = n_grafik
+        #l_grafik.place(x=530, y=50)
+        #i_fenster.geometry('1210x570+10+10')
 
         #i_fenster.destroy()
 
@@ -77,7 +87,7 @@ def graf_erzeugen(p_server_name, p_etage, p_raum, p_sensorklasse, p_name_des_wer
                         ORDER BY log_datum_vom"""
         sql_werte = (p_server_name, p_etage, p_raum, p_sensorklasse, p_name_des_wertes, sql_datum_von, sql_datum_bis)
              
-        cursor = db_verbindung.cursor()
+        cursor = con.cursor()
         cursor.execute(sql_anweisung, sql_werte)
         sql_ergebnis = cursor.fetchall()
         cursor.close()
@@ -94,33 +104,73 @@ def graf_erzeugen(p_server_name, p_etage, p_raum, p_sensorklasse, p_name_des_wer
 
     except mysql.connector.Error as error:
         fehler.set("Fehler beim Lesen der Tabelle import_messwerte: {}".format(error))
+
+    #fig = Figure(figsize=(7, 15), dpi=110)
+    #plot1 = fig.add_subplot(1,1,1)
     
     global m_datum_von
     global m_datum_bis
     if (m_datum_von != p_datum_von) or (m_datum_bis != p_datum_bis):
         m_datum_von = p_datum_von
         m_datum_bis = p_datum_bis
-        plt.clf()
-        i_fenster.geometry('510x570+10+10')
+        #fig.clf()
+        #plt.clf()
+        #i_fenster.geometry('510x570+10+10')
 
-        
-    plt.plot(xwerte, ywerte) #, color='green', marker='o', linestyle='dashed', linewidth=2, markersize=12)
+    i_fenster.geometry('1210x570+10+10')
+
+    #rahmen1 = Frame(master=i_fenster, bg='magenta')
+    #rahmen1.pack(side='right', padx='35')
+
+    dataPlot.clf()
+    dataPlot.plot(xwerte, ywerte)
+    dataPlot.set_xlabel('Zeit-Achse')
+    dataPlot.set_ylabel('Temperatur')
+    
+    #canvas = FigureCanvasTkAgg(fig, master=i_fenster)    
+    #canvas.draw()
+    #canvas.get_tk_widget().pack(side='right', padx='35')
+    
+    #plt.plot(xwerte, ywerte) #, color='green', marker='o', linestyle='dashed', linewidth=2, markersize=12)
+    #plt.step(xwerte, ywerte) #, color='green', marker='o', linestyle='dashed', linewidth=2, markersize=12)
     #plt.bar(xwerte, ywerte)
-    plt.xlabel('Zeit-Achse')
-    plt.ylabel('Temperatur')
-    s_grafik = aktuelle_zeit + '_' + p_server_name + '_' + p_etage + '_' + p_raum + '.png'
+    #plt.xlabel('Zeit-Achse')
+    #plt.ylabel('Temperatur')
+    #s_grafik = aktuelle_zeit + '_' + p_server_name + '_' + p_etage + '_' + p_raum + '.png'
     #plt.figure()
     #plt.savefig(s_grafik)
     #plt.show()
+
+    #n_grafik = ImageTk.PhotoImage(Image.open(x_grafik))
+    #l_grafik .configure(image=n_grafik)
+    #l_grafik.image = n_grafik
+    #l_grafik.place(x=530, y=50)
+    #ci_fenster.geometry('1210x570+10+10')
+
+    #i_fenster.destroy()
+ 
+ 
     
-    return s_grafik
+    return #s_grafik
+
+class myPlot:
+    def generatePlot(self):
+        f = Figure(figsize=(7,15), dpi=110)
+
+        # Setup subplots
+        self.subplot1=f.add_subplot(2,1,1)
+
+        # Show plots
+        self.dataPlot = FigureCanvasTkAgg(f, master=i_fenster)
+        self.dataPlot.show()
+        self.dataPlot.get_tk_widget().pack(side=RIGHT, padx='35', fill=BOTH, expand=1)
 
 
 def db_select(p_sql_anweisung, p_sql_werte, p_sql_tabelle):
     
     r_sql_ergebnis = None
     try:
-        cursor = db_verbindung.cursor()
+        cursor = con.cursor()
         cursor.execute(p_sql_anweisung, p_sql_werte)
         r_sql_ergebnis = cursor.fetchall()
         cursor.close()
@@ -132,12 +182,23 @@ def db_select(p_sql_anweisung, p_sql_werte, p_sql_tabelle):
 
 aktuelle_zeit = datetime.now().strftime('%Y%m%d-%H%M%S')  # Format = 20211109-131856
 
-db_verbindung = db_conn()
-cursor = db_verbindung.cursor()
+cursor = con.cursor()
 
 i_fenster = tk.Tk()
 i_fenster.title('Eingaben für die Auswertungsgrafik')
 i_fenster.geometry('510x570+10+10')
+
+#myPlot.generatePlot()
+f = Figure(figsize=(7,15), dpi=110)
+
+# Setup subplots
+subplot1=f.add_subplot(2,1,1)
+
+# Show plots
+dataPlot = FigureCanvasTkAgg(f, master=i_fenster)
+#dataPlot.show()
+dataPlot.get_tk_widget().pack(side=RIGHT, padx='35', fill=BOTH, expand=1)
+
 
 #arbeits_pfad = os.getenv('HOME') + '/Alles/Kunden/Decarbonara/01 Workspace_GIT/01 Python'
 arbeits_pfad = os.path.abspath(os.getcwd()) + '/01 Python'
@@ -157,8 +218,8 @@ l_zeitraum_bis = Label(i_fenster, text="Datum bis: ", anchor='w').place(x=20, y=
 fehler = tk.StringVar()
 l_fehlerzeile = Label(i_fenster, text="Fehlerblock", fg='red', textvariable=fehler, anchor='w').place(x=20, y=480, width=400, height=24)
 
-s_grafik = ImageTk.PhotoImage(Image.open("DSP_leer.png"))
-l_grafik = Label(i_fenster, image=s_grafik)
+#s_grafik = ImageTk.PhotoImage(Image.open("DSP_leer.png"))
+#l_grafik = Label(i_fenster, image=s_grafik)
 #l_grafik.place(x=530, y=50)
 
 p1 = tk.StringVar()

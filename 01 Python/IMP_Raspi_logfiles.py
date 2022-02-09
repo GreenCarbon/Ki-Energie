@@ -13,8 +13,6 @@ import codecs
 # --- 2. positiv geprüften Inhalt in die Tabelle importbox schreiben
 def insert_log_zeile(zeile, p_datei, p_satznummer, anzahl_fehler):
 
-    kein_fehler_gefunden = True
-
     zeile_ary = []
     str_zeile = zeile.decode().replace(';','|')
     zeile_ary = str_zeile.split('|')
@@ -82,7 +80,7 @@ def insert_log_zeile_messwert(zeile, p_datei, p_satznummer, anzahl_fehler):
                          l_name_des_wertes, l_wert_num, l_wert_bit, l_wert_str, l_sensorklasse, l_name_sensorklasse)
 
             db_ergebnis = cursor.execute(sql_anweisung, sql_werte)
-            db_verbindung.commit()
+            con.commit()
             #print("Alle Daten wurden fehlerfrei importiert")
 
         except mysql.connector.Error as error:
@@ -110,7 +108,7 @@ def chk_log_zeile_messwert(zeile, p_datei, p_satznummer, p_server_name, p_wert, 
                          p_satznummer, zeile)
 
             db_ergebnis = cursor.execute(sql_anweisung, sql_werte)
-            db_verbindung.commit()
+            con.commit()
 
         except mysql.connector.Error as error:
             print("Fehler beim Schreiben in die importbox_fehlerlog: {}".format(error))
@@ -148,6 +146,8 @@ def archiv_logdatei(p_log_pfad, p_log_extension, p_log_verarbeitet):
             datei_archiv = p_log_pfad + "Archiv/" + aktuelle_zeit + '_' + datei
             os.rename(filenames, datei_archiv)
 
+my_select_button = Button(root, text="Selektierte verarbeiten", command=select_verarbeiten)
+my_select_button.pack(pady=10)
 
 # --- Beginn des Hauptprogramms ---
 SystemInit()
@@ -188,15 +188,19 @@ for dateien in log_dateien:
         satznummer += 1
         anzahl_saetze += 1
         kein_fehler_gefunden = insert_log_zeile(zeile_str, datei.name, satznummer, anzahl_fehler)
+my_label2 = Label(root, text='')
+my_label2.pack(pady=5)
 
-if db_verbindung.is_connected():
-   cursor.close()
-   db_verbindung.close()
+root.mainloop()
 
-print('Es wurden ' + str(anzahl_dateien) + ' Dateien verarbeitet und insgesamt ' + str(anzahl_saetze) + ' Datensätze in die Tabelle geschrieben.')
-print('Es wurden ' + str(anzahl_fehler) + ' Fehler protokolliert.')
+#if con.is_connected():
+#   cursor.close()
+#   con.close()
+
+#print('Es wurden ' + str(anzahl_dateien) + ' Dateien verarbeitet und insgesamt ' + str(anzahl_saetze) + ' Datensätze in die Tabelle geschrieben.')
+#print('Es wurden ' + str(anzahl_fehler) + ' Fehler protokolliert.')
 
 # - noch schnell alle Dateien ins Archiv-Verzeichnis verschieben
-archiv_logdatei(log_pfad, log_datei, kein_fehler_gefunden)
+#archiv_logdatei(log_pfad, log_datei, kein_fehler_gefunden)
 
 
