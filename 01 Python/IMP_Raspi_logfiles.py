@@ -3,10 +3,89 @@ import mysql.connector
 import os
 from glob import glob
 from datetime import datetime
+from tkinter import *
+
+# Import Anweisungen für interne Klassen & Files
 from INT_Classes import *
-import codecs
+from SQL_Tools import *
+
+SystemInit()
+con = db_conn()
+
+# --- Beginn des Hauptprogramms ---
+
+global aktuelle_zeit
+aktuelle_zeit = datetime.now().strftime('%Y%m%d-%H%M%S')  # Format = 20211109-131856
+
+global my_label1
+global my_label2
+
+cursor = con.cursor()
+
+root = Tk()
+root.geometry("500x500")
+root.title('Import LOG-Files')
+
+my_label1 = Label(root, text='')
+my_label1.pack(pady=10)
+
+my_frame = Frame(root)
+my_scrollbar = Scrollbar(my_frame, orient=VERTICAL)
+
+my_listbox = Listbox(my_frame, width=20, height=15, yscrollcommand=my_scrollbar.set, selectmode=EXTENDED)
+my_scrollbar.config(command=my_listbox.yview)
+my_scrollbar.pack(pady=10, side=RIGHT, fill=Y)
+my_frame.pack()
+
+my_listbox.pack(pady=10)
+
+global log_pfad
+#log_pfad = os.getenv('HOME') + '/Decarbonara/Ki-Energie/03 LogFiles/'
+log_pfad = getConfigParam("ENVIRONMENT", "datafiles")
+#os.chdir(log_pfad)
+log_datei = 'devlog*'
+
+label_pfad = 'Ausgewählter Suchpfad für die Log-Dateien: ' + '\n' + log_pfad
+my_label1.config(text=label_pfad)
+
+os.chdir(log_pfad)
+log_dateien = sorted(glob(log_datei), key=os.path.basename)
+
+for dateien in log_dateien:
+    my_listbox.insert(END, dateien)
 
 
+def select_verarbeiten():
+    anzahl_fehler = 0
+    result = ''
+    kein_fehler_gefunden = True
+    __my_selection = []
+    
+    for item in my_listbox.curselection():
+        datei_verarbeitet = str(my_listbox.get(item))
+        datei_select = log_pfad + datei_verarbeitet
+        datei = open(f'{datei_select}', 'rb')
+        satznummer = 0
+        
+# --- Zeile für Zeile wird hier gelesen, geprüft und in die DB geschrieben
+        for zeile in datei:
+            satznummer += 1
+            zeile_str = zeile.decode('unicode_escape').encode('utf-8')
+            insert_log_zeile(zeile_str, datei.name, satznummer, anzahl_fehler)
+       
+# --- Ausgabe der verarbeiteten Dateien im Fenster
+        result = result + 'Datei: ' + datei_verarbeitet + ' gelesen ' + str(satznummer) + ' fehlerhaft ' + str(anzahl_fehler) + '\n' 
+        my_label2.config(text=result)
+
+        datei_archiv = log_pfad + "Archiv/" + aktuelle_zeit + '_' + datei_verarbeitet
+        os.rename(datei_select, datei_archiv)
+
+        
+# --- hier noch schnell die Listbox bereinigen
+    __my_selection = my_listbox.curselection()
+    for index in reversed(__my_selection):
+        my_listbox.delete(index)
+    
 
 # --- Routine verarbeitet die einzelnen Zeilen
 # --- 1. Inhalt prüfen und bei Fehler ins fehler_log schreiben
@@ -19,25 +98,19 @@ def insert_log_zeile(zeile, p_datei, p_satznummer, anzahl_fehler):
     l_log_satzart = zeile_ary[1]
 
     if l_log_satzart == 'MESSWERT':
-        kein_fehler_gefunden = insert_log_zeile_messwert(str_zeile, p_datei, p_satznummer, anzahl_fehler)
+        anzahl_fehler = 0
+        insert_log_zeile_messwert(zeile, p_datei, p_satznummer, anzahl_fehler)
     elif l_log_satzart == 'CONFIG':
-        kein_fehler_gefunden = insert_log_zeile_config(str_zeile, p_datei, p_satznummer)
-    else:
-        kein_fehler_gefunden = False
-
-    return kein_fehler_gefunden
+        anzahl_fehler = 0
+        insert_log_zeile_config(zeile, p_datei, p_satznummer, anzahl_fehler)
 
 
 # --- Routine erzeugt eine Zeile mit Messwerten in Tabelle import_messwerte
 def insert_log_zeile_messwert(zeile, p_datei, p_satznummer, anzahl_fehler):
 
     zeile_ary = []
-    zeile_ary = zeile.split('|')
-    if len(zeile_ary) < 10: 
-        print("Zeile enthält keine 9 Felder :" , zeile)
-        kein_fehler_gefunden = False
-        return kein_fehler_gefunden
-    
+    str_zeile = zeile.decode().replace(';','|')
+    zeile_ary = str_zeile.split('|')
     l_log_datum_vom = zeile_ary[0]
     l_server_name = zeile_ary[2]
     l_etage = zeile_ary[3]
@@ -101,11 +174,12 @@ def chk_log_zeile_messwert(zeile, p_datei, p_satznummer, p_server_name, p_wert, 
         anzahl_fehler += 1
         kein_fehler_gefunden = False
         try:
+            str_zeile = zeile.decode().replace(';','|')
             fehlertext = 'Der Wert muss einen dezimalen Wert enthalten. Prüf das mal, aber schnell...'
             sql_anweisung = """INSERT INTO importbox_fehlerlog (server_name, datei, fehlertext, satznummer, datensatz) 
                                VALUES(%s, %s, %s, %s, %s)"""
             sql_werte = (p_server_name, p_datei, fehlertext,
-                         p_satznummer, zeile)
+                         p_satznummer, str_zeile)
 
             db_ergebnis = cursor.execute(sql_anweisung, sql_werte)
             con.commit()
@@ -122,7 +196,8 @@ def insert_log_zeile_config(zeile, p_datei, p_satznummer):
     kein_fehler_gefunden = True
     
     zeile_ary = []
-    zeile_ary = zeile.split('|')
+    str_zeile = zeile.decode().replace(';','|')
+    zeile_ary = str_zeile.split('|')
     l_log_datum_vom = zeile_ary[0]
     l_server_name = zeile_ary[2]
 
@@ -137,70 +212,14 @@ def chk_str_is_float(__s):
     except:
         return False
 
-
-# --- Archivierungsroutine ---
-def archiv_logdatei(p_log_pfad, p_log_extension, p_log_verarbeitet):
-    if p_log_verarbeitet:
-        for filenames in glob(p_log_pfad + p_log_extension):
-            datei = filenames.replace(p_log_pfad, "")
-            datei_archiv = p_log_pfad + "Archiv/" + aktuelle_zeit + '_' + datei
-            os.rename(filenames, datei_archiv)
-
 my_select_button = Button(root, text="Selektierte verarbeiten", command=select_verarbeiten)
 my_select_button.pack(pady=10)
 
-# --- Beginn des Hauptprogramms ---
-SystemInit()
-aktuelle_zeit = datetime.now().strftime('%Y%m%d-%H%M%S')  
-                            # Format = 20211109-131856
-#log_pfad = os.getenv('HOME') + '/Entwicklung/LogFiles/'
-log_pfad=getConfigParam("ENVIRONMENT", "datafiles")
-log_datei = 'devlog*'
-satznummer = 0
-anzahl_dateien = 0
-anzahl_saetze = 0
-anzahl_fehler = 0
-v_dateiname = None 
-
-#os.chdir(log_pfad)
-os.chdir(getConfigParam("ENVIRONMENT", "datafiles"))
-log_dateien = sorted(glob(log_datei), key=os.path.basename)
-
-db_verbindung = mysql.connector.connect(database='DeCarbonara',
-                                            user='root',
-                                        password='DeCarbonaras#2021') 
-                                        #password=getpass("Enter password: "))
-                                        
-cursor = db_verbindung.cursor()
-
-
-for dateien in log_dateien:
-    datei = open(f'{dateien}', 'rb')
-    #datei = codecs.open(f'{dateien}', 'r', encoding="ascii", errors="surrogateescape")
-    # - mit dem Beginn einer neuen Datei wird der Satzzähler auf 0 zurückgesetzt
-    if v_dateiname is not datei.name:
-        v_dateiname = datei.name
-        satznummer = 0
-        anzahl_dateien += 1
-
-    for zeile in datei:
-        zeile_str = zeile.decode('unicode_escape').encode('utf-8')
-        satznummer += 1
-        anzahl_saetze += 1
-        kein_fehler_gefunden = insert_log_zeile(zeile_str, datei.name, satznummer, anzahl_fehler)
 my_label2 = Label(root, text='')
 my_label2.pack(pady=5)
 
 root.mainloop()
 
-#if con.is_connected():
-#   cursor.close()
-#   con.close()
-
-#print('Es wurden ' + str(anzahl_dateien) + ' Dateien verarbeitet und insgesamt ' + str(anzahl_saetze) + ' Datensätze in die Tabelle geschrieben.')
-#print('Es wurden ' + str(anzahl_fehler) + ' Fehler protokolliert.')
-
-# - noch schnell alle Dateien ins Archiv-Verzeichnis verschieben
-#archiv_logdatei(log_pfad, log_datei, kein_fehler_gefunden)
-
-
+if con.is_connected():
+   cursor.close()
+   con.close()
