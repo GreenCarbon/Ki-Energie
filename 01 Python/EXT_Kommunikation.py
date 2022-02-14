@@ -2,7 +2,7 @@
 # In dieser Datei werden alle Classen und Funktionen für die 
 # externe Kommunikation mit Sensoren und Aktoren festgelegt
 # -----------------------------------------------------------
-
+###
 from time import strptime
 import mysql.connector
 import matplotlib.pyplot as plt

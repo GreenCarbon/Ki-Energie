@@ -9,7 +9,7 @@ config = ""
 class ext_params() :
     pass; 
     
-
+ 
 
 # Hier werden alle Parameter bereitgestellt, welche über Config-File(s) beim Programmstart eingelesen werden
 class config_params() :
@@ -31,7 +31,7 @@ class tools() :
     def getCurYear() :
         return 20
     
-
+ 
 # Aufruf der Systeminitialisierung. Hat alles funktioniert, wird True zurückgeliefert, bei Fehlern FALS
 def SystemInit() :
     connect_database()

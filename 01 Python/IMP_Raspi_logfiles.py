@@ -65,6 +65,8 @@ def select_verarbeiten():
     for item in my_listbox.curselection():
         datei_verarbeitet = str(my_listbox.get(item))
         datei_select = log_pfad + datei_verarbeitet
+        #datei = codecs.open(f'{dateien}', 'r', encoding="ascii", errors="surrogateescape")
+        # - mit dem Beginn einer neuen Datei wird der Satzzähler auf 0 zurückgesetzt
         datei = open(f'{datei_select}', 'rb')
         satznummer = 0
         
@@ -103,15 +105,20 @@ def insert_log_zeile(zeile, p_datei, p_satznummer, anzahl_fehler):
         insert_log_zeile_messwert(zeile, p_datei, p_satznummer, anzahl_fehler)
     elif l_log_satzart == 'CONFIG':
         anzahl_fehler = 0
-        insert_log_zeile_config(zeile, p_datei, p_satznummer, anzahl_fehler)
+        insert_log_zeile_config(zeile, p_datei, p_satznummer)
 
 
 # --- Routine erzeugt eine Zeile mit Messwerten in Tabelle import_messwerte
 def insert_log_zeile_messwert(zeile, p_datei, p_satznummer, anzahl_fehler):
-
+    
     zeile_ary = []
     str_zeile = zeile.decode().replace(';','|')
     zeile_ary = str_zeile.split('|')
+    if len(zeile_ary) < 10: 
+        print("Zeile enthält keine 9 Felder :" , zeile)
+        kein_fehler_gefunden = False
+        return kein_fehler_gefunden
+    
     l_log_datum_vom = zeile_ary[0]
     l_server_name = zeile_ary[2]
     l_etage = zeile_ary[3]
