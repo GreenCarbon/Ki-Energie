@@ -4,7 +4,7 @@ import os
 from glob import glob
 from datetime import datetime
 from tkinter import *
-# Karsten 2
+
 
 # Import Anweisungen für interne Klassen & Files
 from INT_Classes import *
