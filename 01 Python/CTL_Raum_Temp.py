@@ -1,4 +1,8 @@
-# -----------------------------------------------------------
+#
+# 
+# AKTUELL KEINE VERWENDUNG !!!!!!!!
+#
+# ## -----------------------------------------------------------
 # Controller für Raumtemperatur
 # Übernimmt die komplette Raumtemperatursteuerung 
 # -----------------------------------------------------------
@@ -14,7 +18,7 @@ from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
 import logging 
-from EXT_Kommunikation import *
+from CTL_Aktor_Sensor import *
 
 # Import Anweisungen für interne Klassen & Files
 from INT_Classes import *

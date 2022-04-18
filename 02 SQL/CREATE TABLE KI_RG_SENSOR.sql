@@ -1,4 +1,4 @@
-drop table IF EXISTS `KI_RG_SENSOR`
+drop table IF EXISTS `ki_rg_sensor`
 ;
 # Tabelle zum Speichern der Sensoren
 # Sensoren können aktuell Temperatur, Luftfeuchtigkeit, Strom, Leistung, Helligkeit sein
@@ -15,10 +15,10 @@ drop table IF EXISTS `KI_RG_SENSOR`
 
 # Constraints
 
-CREATE TABLE IF NOT EXISTS `KI_RG_SENSOR` (  
+CREATE TABLE IF NOT EXISTS `ki_rg_sensor` (  
     `Id` int NOT NULL AUTO_INCREMENT,
-    `geraete_id` BIGINT,
-    `typen_id` BIGINT,
+    `geraete_id` BIGINT,    # Verweis auf "geraete"
+    `typen_id` BIGINT,      # Verweis auf "ki_rg_typen"
     `name` datetime,
     `gewerk_id` BIGINT,
     `raum_id` BIGINT,

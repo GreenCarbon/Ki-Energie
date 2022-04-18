@@ -1,4 +1,4 @@
-drop table IF EXISTS `KI_RG_TYPEN`
+drop table IF EXISTS `ki_rg_typen`
 ;
 # Tabelle der AKTOR- und SENSOR-Typen für KI-Regler
 # 
@@ -14,7 +14,7 @@ drop table IF EXISTS `KI_RG_TYPEN`
 
 # Constraints
 
-CREATE TABLE IF NOT EXISTS `KI_RG_TYPEN` (  
+CREATE TABLE IF NOT EXISTS `ki_rg_typen` (  
     `Id` int NOT NULL AUTO_INCREMENT,
     `typ_name` VARCHAR(20) DEFAULT NULL,
     `einheit` VARCHAR(20) DEFAULT NULL,

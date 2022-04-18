@@ -12,14 +12,9 @@ from datetime import *
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
-<<<<<<< HEAD:01 Python/DSP_RPI_Log.py
 from PIL import Image, ImageTk
 import logging 
-
-=======
-#from PIL import Image, ImageTk
  
->>>>>>> baed8ac (div. ältere Änderungen):01 Python/DSP_Raspi_Log.py
 # Import Anweisungen für interne Klassen & Files
 from INT_Classes import *
 from SQL_Tools import *

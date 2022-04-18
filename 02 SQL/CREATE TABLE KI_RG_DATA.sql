@@ -1,4 +1,4 @@
-drop table IF EXISTS `KI_RG_DATA`
+drop table IF EXISTS `ki_rg_data`
 ;
 # Tabelle zum Speichern der Lern-Daten
 # Die Tabelle soll die Reglereinstellung gemäß einem mehrdimensionalen Array (später für numpy) Speichern
@@ -14,7 +14,7 @@ drop table IF EXISTS `KI_RG_DATA`
 
 # Constraints
 
-CREATE TABLE IF NOT EXISTS `KI_RG_DATA` (  
+CREATE TABLE IF NOT EXISTS `ki_rg_data` (  
     `Id` int NOT NULL AUTO_INCREMENT,
     `sequence` BIGINT,
     `aktor_id` BIGINT,

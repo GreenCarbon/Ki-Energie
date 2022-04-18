@@ -1,4 +1,4 @@
-drop table IF EXISTS `KI_RG_GEWERK`
+drop table IF EXISTS `ki_rg_gewerk`
 ;
 # Tabelle der Gewerke
 # 
@@ -13,7 +13,7 @@ drop table IF EXISTS `KI_RG_GEWERK`
 # Constraints
 
 
-CREATE TABLE IF NOT EXISTS `KI_RG_GEWERK` (  
+CREATE TABLE IF NOT EXISTS `ki_rg_gewerk` (  
     `Id` int NOT NULL AUTO_INCREMENT,
     `gewerk_name` VARCHAR(100) DEFAULT ' ',
     `gewerk_ort` VARCHAR(100) DEFAULT ' ',

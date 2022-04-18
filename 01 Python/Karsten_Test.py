@@ -20,7 +20,7 @@ Zpi  = np.array([Kp*Tn , Kp ])
 Npi  = np.array([ Tn, 0])
 Zdt1  = np.array([Kp*Tv , 0])
 Ndt1  = np.array([Tv/VV , 1])
-t = np.arange(0,5,0.05)
+t = np.arange(0,10,0.05)
 Gpi = tf(Zpi,Npi)
 ypi, t = control.matlab.step(Gpi,t)
 
@@ -36,3 +36,5 @@ ax2.plot(tt, ydt, "r")
 ax2.set_ylabel('D-Anteil', color="red", fontsize=14) 
 ax1.set_xlabel('t [s]', fontsize=12) 
 ax1.set_title('PID-T1 - Regler', fontsize=12)
+x = 1
+## Anderer PID Regler : https://onion.io/2bt-pid-control-python/
