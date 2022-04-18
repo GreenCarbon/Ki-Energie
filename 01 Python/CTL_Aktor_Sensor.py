@@ -20,7 +20,15 @@ from PIL import Image, ImageTk
 from requests.auth import HTTPDigestAuth
 import requests
 import xml.etree.ElementTree as xml
-
+# Django Framework
+from django.db import models
+import sys 
+import os
+import django
+from app_ki_energie import settings
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app_ki_energie.settings')
+django.setup()
+from app_ki_energie.models import *
 
 
 import sys
@@ -99,7 +107,7 @@ class Temperatur_Aktor():
         try:
             sql_anweisung = """SELECT * FROM ki_rg_actor_sensor 
                 WHERE isActive = true """
-   
+            sensors = KiRgActorSensor.objects.filter(isactive = 1).filter(aktor_id= self.Aktor_Id)
             cursor = self.con.cursor()
             cursor.execute(sql_anweisung)
             sql_erg = cursor.fetchall()
@@ -108,15 +116,13 @@ class Temperatur_Aktor():
             for ctl in sql_erg:
                 sensname = ctl[3]
                 typ = ctl[2]
-            
-        
-            logging.info("Sensor " + sensname + " hinzugefügt.")
-            if (typ == 1): # Vorerst nur Temperatursensoren berücksichtigen
-                ctl_list.append(Temperatur_Aktor(self.Aktor_Id, name))
-# Controller als Hintergrundprozess starten                
-            thread = threading.Thread(target=self.run, args=())
-            thread.daemon = True
-            thread.start()    
+                logging.info("Sensor " + sensname + " hinzugefügt.")
+                if (typ == 1): # Vorerst nur Temperatursensoren berücksichtigen
+                    ctl_list.append(Temperatur_Aktor(self.Aktor_Id, name))
+# Aktor-Controller als Hintergrundprozess starten                
+                    thread = threading.Thread(target=self.run, args=())
+                    thread.daemon = True
+                    thread.start()    
         except mysql.connector.Error as error:
             logging.error("Fehler beim Starten des Actor-Controllers aufgetreten: {}".format(error))
     

@@ -50,7 +50,8 @@ try:
         
         #### Typ noch aus typ_id lesen! 
         if (typ_id == 1):
-            ctl_list.append(Temperatur_Aktor(int(Id), name))
+            aktor = Temperatur_Aktor(int(Id), name)
+            ctl_list.append(aktor)
             logging.info(actor_typ + " Controller " + name + " gestartet.")
         
 
@@ -60,7 +61,7 @@ except mysql.connector.Error as error:
 logging.info("Folgende Controller sind jetzt aktiv:")
 logging.info("=====================================")
 for ctl in ctl_list:
-    logging.info(">>>> : " + str(ctl.Id) +  " / " +  ctl.name)
+    logging.info(">>>> : " + str(ctl.Aktor_Id) +  " / " +  ctl.name)
     
 
 # Endlosschleife, alles andere erledigen die Hintergrundprozesse    
