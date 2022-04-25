@@ -22,6 +22,7 @@ class AuwStatkurven(models.Model):
 
     class Meta:
         managed = False
+        app_label = 'app_ki_energie'
         db_table = 'AUW_StatKurven'
 
 
@@ -39,6 +40,7 @@ class Geraete(models.Model):
 
     class Meta:
         managed = False
+        app_label = 'app_ki_energie'
         db_table = 'geraete'
 
 
@@ -53,6 +55,7 @@ class Geraete2Kunde(models.Model):
 
     class Meta:
         managed = False
+        app_label = 'app_ki_energie'
         db_table = 'geraete2kunde'
 
 
@@ -73,6 +76,7 @@ class ImportMesswerte(models.Model):
 
     class Meta:
         managed = False
+        app_label = 'app_ki_energie'
         db_table = 'import_messwerte'
 
 
@@ -87,6 +91,7 @@ class ImportboxFehlerlog(models.Model):
 
     class Meta:
         managed = False
+        app_label = 'app_ki_energie'
         db_table = 'importbox_fehlerlog'
 
 
@@ -104,6 +109,7 @@ class KiRgActor(models.Model):
 
     class Meta:
         managed = False
+        app_label = 'app_ki_energie'
         db_table = 'ki_rg_actor'
 
 
@@ -117,6 +123,7 @@ class KiRgActorSensor(models.Model):
 
     class Meta:
         managed = False
+        app_label = 'app_ki_energie'
         db_table = 'ki_rg_actor_sensor'
 
 
@@ -131,20 +138,21 @@ class KiRgData(models.Model):
     sensor_val3 = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
     sensor_val4 = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
     sensor_val5 = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
+    regler_val1 = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
+    regler_val2 = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
+    regler_val3 = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
+    regler_val4 = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
+    regler_val5 = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
     aktor_val1 = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
     aktor_val2 = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
-    correction_val = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
-    correction_from_id = models.IntegerField(blank=True, null=True)
-    rating_old = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
-    rating_new = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
-    time_to_completion = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
-    reserve_val1 = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
-    reserve_val2 = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
-    reserve_val5 = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
+    aktor_val3 = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
+    aktor_val4 = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
+    aktor_val5 = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
     log_date = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         managed = False
+        app_label = 'app_ki_energie'
         db_table = 'ki_rg_data'
 
 
@@ -157,6 +165,7 @@ class KiRgGewerk(models.Model):
 
     class Meta:
         managed = False
+        app_label = 'app_ki_energie'
         db_table = 'ki_rg_gewerk'
 
 
@@ -173,6 +182,7 @@ class KiRgSensor(models.Model):
 
     class Meta:
         managed = False
+        app_label = 'app_ki_energie'
         db_table = 'ki_rg_sensor'
 
 
@@ -186,6 +196,7 @@ class KiRgTypen(models.Model):
 
     class Meta:
         managed = False
+        app_label = 'app_ki_energie'
         db_table = 'ki_rg_typen'
 
 
@@ -212,6 +223,7 @@ class Kunde(models.Model):
 
     class Meta:
         managed = False
+        app_label = 'app_ki_energie'
         db_table = 'kunde'
 
 
@@ -232,4 +244,5 @@ class Raumliste(models.Model):
 
     class Meta:
         managed = False
+        app_label = 'app_ki_energie'
         db_table = 'raumliste'

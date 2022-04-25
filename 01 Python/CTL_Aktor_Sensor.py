@@ -105,24 +105,26 @@ class Temperatur_Aktor():
 # Alle Sensoren zu diesem Aktor lesen und instantiieren  
         ctl_list = []      
         try:
-            sql_anweisung = """SELECT * FROM ki_rg_actor_sensor 
-                WHERE isActive = true """
+            #sql_anweisung = """SELECT * FROM ki_rg_actor_sensor 
+            #    WHERE isActive = true """
             sensors = KiRgActorSensor.objects.filter(isactive = 1).filter(aktor_id= self.Aktor_Id)
-            cursor = self.con.cursor()
-            cursor.execute(sql_anweisung)
-            sql_erg = cursor.fetchall()
+            #cursor = self.con.cursor()
+            #cursor.execute(sql_anweisung)
+            #sql_erg = cursor.fetchall()
             sensname = ''
-            cursor.close()
-            for ctl in sql_erg:
-                sensname = ctl[3]
-                typ = ctl[2]
+            #cursor.close()
+            for ctl in sensors:
+                Id = getattr(ctl, "id")  
+                sensor = KiRgSensor.objects.filter(id = Id).first()
+                sensname = getattr(sensor, "name")
+                typ = getattr(sensor, "typen_id")
                 logging.info("Sensor " + sensname + " hinzugefügt.")
                 if (typ == 1): # Vorerst nur Temperatursensoren berücksichtigen
-                    ctl_list.append(Temperatur_Aktor(self.Aktor_Id, name))
+                    ctl_list.append(Temperatur_Sensor(Id))
 # Aktor-Controller als Hintergrundprozess starten                
-                    thread = threading.Thread(target=self.run, args=())
-                    thread.daemon = True
-                    thread.start()    
+            thread = threading.Thread(target=self.run, args=())
+            thread.daemon = True
+            thread.start()    
         except mysql.connector.Error as error:
             logging.error("Fehler beim Starten des Actor-Controllers aufgetreten: {}".format(error))
     
