@@ -90,6 +90,22 @@ class ImportboxFehlerlog(models.Model):
         db_table = 'importbox_fehlerlog'
 
 
+class KiParams(models.Model):
+    id = models.IntegerField(db_column='Id', primary_key=True)  # Field name made lowercase.
+    group = models.CharField(max_length=50, blank=True, null=True)
+    subgroup = models.CharField(max_length=50, blank=True, null=True)
+    name = models.CharField(max_length=50, blank=True, null=True)
+    description = models.CharField(max_length=500, blank=True, null=True)
+    val_int = models.IntegerField(blank=True, null=True)
+    val_dec = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
+    val_string = models.CharField(max_length=45, blank=True, null=True)
+    log_date = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'ki_params'
+
+
 class KiRgActor(models.Model):
     id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
     geraete_id = models.BigIntegerField(blank=True, null=True)
