@@ -117,6 +117,7 @@ class KiRgActor(models.Model):
     default_wert = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
     log_date = models.DateTimeField(blank=True, null=True)
     isactive = models.IntegerField(db_column='isActive', blank=True, null=True)  # Field name made lowercase.
+    loop_time = models.CharField(max_length=45, blank=True, null=True)
 
     class Meta:
         managed = False
