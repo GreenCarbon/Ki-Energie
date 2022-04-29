@@ -80,7 +80,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
-            'read_default_file': '/Users/ingo/Decarbonara/01_Workspace_GIT/01 Python/app_ki_energie/my.cnf',
+            'read_default_file': '/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/01 Python/app_ki_energie/my.cnf',
         }
     }
 }
