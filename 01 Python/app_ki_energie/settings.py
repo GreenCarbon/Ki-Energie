@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'app_ki_energie.apps.KiEnergieConfig',
     
     
 ]
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'app_ki_energie.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,7 +80,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
-            'read_default_file': '/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/01 Python/app_ki_energie/my.cnf',
+            'read_default_file': '/Users/ingo/Decarbonara/01_Workspace_GIT/01 Python/app_ki_energie/my.cnf',
         }
     }
 }

@@ -9,7 +9,7 @@ def-env activate-virtualenv [] {
     }
 
     let is-windows = ((sys).host.name | str downcase) == 'windows'
-    let virtual-env = '/Users/Karsten/Alles/Kunden/Decarbonara/03 Django'
+    let virtual-env = '/Users/ingo/Decarbonara/01_Workspace_GIT/01 Python'
     let bin = 'bin'
     let path-sep = ':'
     let path-name = if $is-windows {
@@ -89,4 +89,4 @@ def-env activate-virtualenv [] {
 activate-virtualenv
 
 alias pydoc = python -m pydoc
-alias deactivate = source '/Users/Karsten/Alles/Kunden/Decarbonara/03 Django/bin/deactivate.nu'
+alias deactivate = source '//Users/ingo/Decarbonara/01_Workspace_GIT/01 Python/bin/deactivate.nu'

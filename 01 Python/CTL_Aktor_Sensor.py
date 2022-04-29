@@ -6,7 +6,7 @@
 from time import strptime
 import mysql.connector
 import matplotlib.pyplot as plt
-import numpy as np
+#import numpy as np
 import os
 import logging 
 import time as TIME
@@ -16,9 +16,9 @@ from datetime import *
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
-from PIL import Image, ImageTk
-from requests.auth import HTTPDigestAuth
-import requests
+#from PIL import Image, ImageTk
+#from requests.auth import HTTPDigestAuth
+#import requests
 import xml.etree.ElementTree as xml
 # Django Framework
 from django.db import models

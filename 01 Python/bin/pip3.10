@@ -1,5 +1,5 @@
 #!/bin/sh
-'''exec' "/Users/Karsten/Alles/Kunden/Decarbonara/03 Django/bin/python" "$0" "$@"
+'''exec' "/Users/ingo/Decarbonara/01_Workspace_GIT/01 Python/bin/python" "$0" "$@"
 ' '''
 # -*- coding: utf-8 -*-
 import re

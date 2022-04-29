@@ -1,4 +1,4 @@
-pfad = "/Users/Ingo/Entwicklung/"
+pfad = "/Users/ingo/Entwicklung/"
 datei = '2021-11-03_LOG.txt'
 logdatei = pfad + datei
 f = open(logdatei,'r')

@@ -5,7 +5,7 @@
 
 from time import strptime
 import time as TIME
-import mysql.connector
+#import mysql.connector
 from CTL_Aktor_Sensor import *
 import os
 from datetime import *

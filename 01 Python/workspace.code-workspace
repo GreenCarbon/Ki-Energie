@@ -1,12 +1,14 @@
 {
 	"folders": [
 		{
-			"path": "../../../Decarbonara_Git/Decarbonara/Python"
-		},
-		{
-			"name": "01 Workspace_GIT",
-			"path": ".."
+			"name": "01 Workspace_GIT/01 Python",
+			"path": "/Users/ingo/Decarbonara/01_Workspace_GIT/"
 		}
 	],
-	"settings": {}
+	"settings": {},
+	"extensions": {
+		"recommendations": [
+			"geyao.html-snippets"
+		]
+	}
 }
