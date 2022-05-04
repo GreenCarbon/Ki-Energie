@@ -5,6 +5,15 @@
 #   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
+
+##################################################
+# Migration erstellen 
+# - Aus Verzeichnis 01 Python
+# python3 manage.py makemigrations app_ki_energie
+# python3 manage.py migrate app_ki_energie      
+##################################################
+
+from pickle import TRUE
 from django.db import models
 from django.urls import reverse
 
@@ -21,7 +30,8 @@ class AuwStatkurven(models.Model):
     log_date = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
+        app_label = 'app_ki_energie'
         db_table = 'AUW_StatKurven'
 
 
@@ -38,7 +48,8 @@ class Geraete(models.Model):
     log_letzte_aenderung_am = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
+        app_label = 'app_ki_energie'
         db_table = 'geraete'
 
 
@@ -52,7 +63,8 @@ class Geraete2Kunde(models.Model):
     log_letzte_aenderung_am = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
+        app_label = 'app_ki_energie'
         db_table = 'geraete2kunde'
 
 
@@ -72,7 +84,8 @@ class ImportMesswerte(models.Model):
     log_eingelesen_am = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
+        app_label = 'app_ki_energie'
         db_table = 'import_messwerte'
 
 
@@ -86,7 +99,8 @@ class ImportboxFehlerlog(models.Model):
     log_eingelesen_am = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
+        app_label = 'app_ki_energie'
         db_table = 'importbox_fehlerlog'
 
 
@@ -102,7 +116,8 @@ class KiParams(models.Model):
     log_date = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
+        app_label = 'app_ki_energie'
         db_table = 'ki_params'
 
 
@@ -120,7 +135,8 @@ class KiRgActor(models.Model):
     loop_time = models.CharField(max_length=45, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
+        app_label = 'app_ki_energie'
         db_table = 'ki_rg_actor'
 
 
@@ -133,7 +149,8 @@ class KiRgActorSensor(models.Model):
     log_date = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
+        app_label = 'app_ki_energie'
         db_table = 'ki_rg_actor_sensor'
 
 
@@ -161,7 +178,8 @@ class KiRgData(models.Model):
     log_date = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
+        app_label = 'app_ki_energie'
         db_table = 'ki_rg_data'
 
 
@@ -173,7 +191,8 @@ class KiRgGewerk(models.Model):
     log_date = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
+        app_label = 'app_ki_energie'
         db_table = 'ki_rg_gewerk'
 
 
@@ -189,7 +208,8 @@ class KiRgSensor(models.Model):
     log_date = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
+        app_label = 'app_ki_energie'
         db_table = 'ki_rg_sensor'
 
 
@@ -202,7 +222,8 @@ class KiRgTypen(models.Model):
     log_date = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
+        app_label = 'app_ki_energie'
         db_table = 'ki_rg_typen'
 
 
@@ -228,7 +249,8 @@ class Kunde(models.Model):
     log_letzte_änderung_am = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
+        app_label = 'app_ki_energie'
         db_table = 'kunde'
 
 
@@ -248,7 +270,8 @@ class Raumliste(models.Model):
     log_letzte_änderung_am = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
+        app_label = 'app_ki_energie'
         db_table = 'raumliste'
 
 
@@ -260,7 +283,7 @@ class Adressen(models.Model):
     ort = models.CharField(max_length=100)
 
     class Meta:
-        managed = False
+        managed = True
         app_label = 'app_ki_energie'
         db_table = 'adressen'
 
