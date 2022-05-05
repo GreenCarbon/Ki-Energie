@@ -14,3 +14,4 @@ def index(request):
 
 def imp_rpi(request):
     return render(request, "imp_rpi.html")
+
