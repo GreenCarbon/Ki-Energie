@@ -403,3 +403,8 @@
 20:45:44,794 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
 11:58:32,535 root INFO Running Decarbonara 
 12:08:48,368 root INFO Running Decarbonara 
+15:04:50,776 root INFO Running Decarbonara 
+15:04:50,796 root INFO Folgende Controller sind jetzt aktiv:
+15:04:50,796 root INFO =====================================
+18:32:20,241 root INFO Running Decarbonara 
+18:32:53,766 root INFO Running Decarbonara 
