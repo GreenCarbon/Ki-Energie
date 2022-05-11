@@ -53,19 +53,19 @@ class Geraete(models.Model):
 
     
 
-class Geraete2(models.Model):
-    use_in_migrations = True
-    
-    geraete_id = models.AutoField(db_column='geraete_Id', primary_key=True)  # Field name made lowercase.
-    geraete_name = models.CharField(max_length=50, blank=True, null=True)
-    geraete_art = models.CharField(max_length=50, blank=True, null=True)
-    dns_name = models.CharField(max_length=60, blank=True, null=True)
-    seriennummer = models.CharField(max_length=50, blank=True, null=True)
-    hw_version = models.CharField(max_length=35, blank=True, null=True)
-    sw_version = models.CharField(max_length=35, blank=True, null=True)
-    bemerkung = models.CharField(max_length=100, blank=True, null=True)
-    log_erzeugt_am = models.DateTimeField(blank=True, null=True)
-    log_letzte_aenderung_am = models.DateTimeField(blank=True, null=True)
+#class Geraete2(models.Model):
+#    use_in_migrations = True
+#    
+#    geraete_id = models.AutoField(db_column='geraete_Id', primary_key=True)  # Field name made lowercase.
+#    geraete_name = models.CharField(max_length=50, blank=True, null=True)
+#    geraete_art = models.CharField(max_length=50, blank=True, null=True)
+#    dns_name = models.CharField(max_length=60, blank=True, null=True)
+#    seriennummer = models.CharField(max_length=50, blank=True, null=True)
+#    hw_version = models.CharField(max_length=35, blank=True, null=True)
+#    sw_version = models.CharField(max_length=35, blank=True, null=True)
+#    bemerkung = models.CharField(max_length=100, blank=True, null=True)
+#    log_erzeugt_am = models.DateTimeField(blank=True, null=True)
+#    log_letzte_aenderung_am = models.DateTimeField(blank=True, null=True)
 
     
         
@@ -206,7 +206,7 @@ class KiRgSensor(models.Model):
     id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
     geraete_id = models.BigIntegerField(blank=True, null=True)
     typen_id = models.BigIntegerField(blank=True, null=True)
-    name = models.DateTimeField(blank=True, null=True)
+    name = models.CharField(max_length=500, blank=True, null=True)
     gewerk_id = models.BigIntegerField(blank=True, null=True)
     raum_id = models.BigIntegerField(blank=True, null=True)
     montageort = models.CharField(max_length=100, blank=True, null=True)

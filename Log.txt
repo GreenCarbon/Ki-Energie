@@ -408,3 +408,15 @@
 15:04:50,796 root INFO =====================================
 18:32:20,241 root INFO Running Decarbonara 
 18:32:53,766 root INFO Running Decarbonara 
+05:06:14,272 root INFO Running Decarbonara 
+05:06:14,292 root INFO Running Decarbonara 
+05:10:38,247 root INFO Running Decarbonara 
+05:10:38,263 root INFO Running Decarbonara 
+05:50:35,808 root INFO Running Decarbonara 
+05:50:35,825 root INFO Running Decarbonara 
+05:50:35,829 root INFO Sensor 2022-10-05 22:00:00.000000 hinzugefügt.
+05:50:35,831 root INFO Sensor 2022-10-05 22:00:00.000000 hinzugefügt.
+05:50:35,832 root INFO Temperatur Controller HK 1 Arbeitszimmer gestartet.
+05:50:35,833 root INFO Folgende Controller sind jetzt aktiv:
+05:50:35,833 root INFO =====================================
+05:50:35,833 root INFO >>>> : 1 / HK 1 Arbeitszimmer
