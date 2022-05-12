@@ -428,3 +428,268 @@
 04:44:36,465 root INFO Folgende Controller sind jetzt aktiv:
 04:44:36,466 root INFO =====================================
 04:44:36,466 root INFO >>>> : 1 / HK 1 Arbeitszimmer
+13:55:48,1 root INFO Running Decarbonara 
+13:56:10,259 asyncio DEBUG Using selector: KqueueSelector
+13:56:10,279 root INFO Running Decarbonara 
+13:57:05,357 root INFO Sensor 2022-10-05 22:00:00.000000 hinzugefügt.
+13:57:18,476 root INFO Sensor 2022-10-05 22:00:00.000000 hinzugefügt.
+14:04:47,999 root INFO Running Decarbonara 
+14:04:48,6 asyncio DEBUG Using selector: KqueueSelector
+14:04:48,19 root INFO Running Decarbonara 
+14:06:03,689 root INFO Running Decarbonara 
+14:06:03,694 asyncio DEBUG Using selector: KqueueSelector
+14:06:03,704 root INFO Running Decarbonara 
+14:06:03,708 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 1 hinzugefügt.
+14:06:03,710 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 2 hinzugefügt.
+14:06:03,711 root INFO Temperatur Controller HK 1 Arbeitszimmer gestartet.
+14:06:03,711 root INFO Folgende Controller sind jetzt aktiv:
+14:06:03,712 root INFO =====================================
+14:06:03,712 root INFO >>>> : 1 / HK 1 Arbeitszimmer
+14:06:37,914 root INFO Running Decarbonara 
+14:06:37,920 asyncio DEBUG Using selector: KqueueSelector
+14:06:37,930 root INFO Running Decarbonara 
+14:06:37,934 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 1 hinzugefügt.
+14:06:37,936 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 2 hinzugefügt.
+14:06:37,938 root INFO Temperatur Controller HK 1 Arbeitszimmer gestartet.
+14:06:37,938 root INFO Folgende Controller sind jetzt aktiv:
+14:06:37,938 root INFO =====================================
+14:06:37,938 root INFO >>>> : 1 / HK 1 Arbeitszimmer
+14:07:04,986 root INFO Running Decarbonara 
+14:07:04,991 asyncio DEBUG Using selector: KqueueSelector
+14:07:05,4 root INFO Running Decarbonara 
+14:07:05,7 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 1 hinzugefügt.
+14:07:05,9 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 2 hinzugefügt.
+14:07:05,10 root INFO Temperatur Controller HK 1 Arbeitszimmer gestartet.
+14:07:05,10 root INFO Folgende Controller sind jetzt aktiv:
+14:07:05,10 root INFO =====================================
+14:07:05,10 root INFO >>>> : 1 / HK 1 Arbeitszimmer
+14:07:35,355 root INFO Running Decarbonara 
+14:07:35,361 asyncio DEBUG Using selector: KqueueSelector
+14:07:35,371 root INFO Running Decarbonara 
+14:07:35,376 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 1 hinzugefügt.
+14:07:35,378 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 2 hinzugefügt.
+14:07:35,379 root INFO Temperatur Controller HK 1 Arbeitszimmer gestartet.
+14:07:35,379 root INFO Folgende Controller sind jetzt aktiv:
+14:07:35,379 root INFO =====================================
+14:07:35,380 root INFO >>>> : 1 / HK 1 Arbeitszimmer
+14:07:35,402 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+14:07:35,430 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1417 HTTP/1.1" 200 103
+14:07:35,448 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+14:07:35,471 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+14:09:58,729 root INFO Running Decarbonara 
+14:09:58,734 asyncio DEBUG Using selector: KqueueSelector
+14:09:58,747 root INFO Running Decarbonara 
+14:09:58,751 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 1 hinzugefügt.
+14:09:58,752 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 2 hinzugefügt.
+14:09:58,754 root INFO Temperatur Controller HK 1 Arbeitszimmer gestartet.
+14:09:58,754 root INFO Folgende Controller sind jetzt aktiv:
+14:09:58,754 root INFO =====================================
+14:09:58,754 root INFO >>>> : 1 / HK 1 Arbeitszimmer
+14:09:58,788 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+14:09:58,815 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1417 HTTP/1.1" 200 103
+14:09:58,832 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+14:09:58,856 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+14:14:48,422 root INFO Running Decarbonara 
+14:14:48,428 asyncio DEBUG Using selector: KqueueSelector
+14:14:48,442 root INFO Running Decarbonara 
+14:14:48,446 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 1 hinzugefügt.
+14:14:48,448 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 2 hinzugefügt.
+14:14:48,449 root INFO Temperatur Controller HK 1 Arbeitszimmer gestartet.
+14:14:48,449 root INFO Folgende Controller sind jetzt aktiv:
+14:14:48,450 root INFO =====================================
+14:14:48,450 root INFO >>>> : 1 / HK 1 Arbeitszimmer
+14:14:48,472 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+14:14:48,499 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1417 HTTP/1.1" 200 103
+14:14:48,514 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+14:14:48,537 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+14:14:53,559 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+14:14:53,587 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1417 HTTP/1.1" 200 103
+14:14:53,601 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+14:14:53,624 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+14:14:58,647 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+14:14:58,678 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1417 HTTP/1.1" 200 103
+14:14:58,694 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+14:14:58,717 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+14:15:03,753 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+14:15:03,777 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1417 HTTP/1.1" 200 103
+14:15:03,793 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+14:15:03,815 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+14:15:08,836 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+14:15:08,868 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1417 HTTP/1.1" 200 103
+14:15:08,883 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+14:15:08,906 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:01:26,233 root INFO Running Decarbonara 
+18:01:26,239 asyncio DEBUG Using selector: KqueueSelector
+18:01:26,253 root INFO Running Decarbonara 
+18:01:26,256 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 1 hinzugefügt.
+18:03:57,356 root INFO Running Decarbonara 
+18:03:57,362 asyncio DEBUG Using selector: KqueueSelector
+18:03:57,373 root INFO Running Decarbonara 
+18:03:57,377 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 1 hinzugefügt.
+18:05:26,427 root INFO Running Decarbonara 
+18:05:26,433 asyncio DEBUG Using selector: KqueueSelector
+18:05:26,443 root INFO Running Decarbonara 
+18:05:26,447 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 1 hinzugefügt.
+18:07:36,736 root INFO Running Decarbonara 
+18:07:36,741 asyncio DEBUG Using selector: KqueueSelector
+18:07:36,754 root INFO Running Decarbonara 
+18:07:36,758 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 1 hinzugefügt.
+18:09:27,924 root INFO Running Decarbonara 
+18:09:27,930 asyncio DEBUG Using selector: KqueueSelector
+18:09:27,941 root INFO Running Decarbonara 
+18:09:27,945 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 1 hinzugefügt.
+18:10:09,275 root INFO Running Decarbonara 
+18:10:09,280 asyncio DEBUG Using selector: KqueueSelector
+18:10:09,291 root INFO Running Decarbonara 
+18:10:09,294 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 1 hinzugefügt.
+18:10:53,144 root INFO Running Decarbonara 
+18:10:53,149 asyncio DEBUG Using selector: KqueueSelector
+18:10:53,159 root INFO Running Decarbonara 
+18:10:53,163 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 1 hinzugefügt.
+18:11:26,705 root INFO Running Decarbonara 
+18:11:26,710 asyncio DEBUG Using selector: KqueueSelector
+18:11:26,720 root INFO Running Decarbonara 
+18:11:26,723 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 1 hinzugefügt.
+18:11:46,36 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 2 hinzugefügt.
+18:11:46,38 root INFO Temperatur Controller HK 1 Arbeitszimmer gestartet.
+18:11:46,38 root INFO Folgende Controller sind jetzt aktiv:
+18:11:46,39 root INFO =====================================
+18:11:46,39 root INFO >>>> : 1 / HK 1 Arbeitszimmer
+18:13:02,81 root INFO Running Decarbonara 
+18:13:02,86 asyncio DEBUG Using selector: KqueueSelector
+18:13:02,97 root INFO Running Decarbonara 
+18:13:02,101 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 1 hinzugefügt.
+18:13:02,110 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 2 hinzugefügt.
+18:13:02,112 root INFO Temperatur Controller HK 1 Arbeitszimmer gestartet.
+18:13:02,112 root INFO Folgende Controller sind jetzt aktiv:
+18:13:02,112 root INFO =====================================
+18:13:02,112 root INFO >>>> : 1 / HK 1 Arbeitszimmer
+18:13:02,147 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:13:02,176 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:13:22,512 root INFO Running Decarbonara 
+18:13:22,517 asyncio DEBUG Using selector: KqueueSelector
+18:13:22,527 root INFO Running Decarbonara 
+18:13:22,531 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 1 hinzugefügt.
+18:13:22,539 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 2 hinzugefügt.
+18:13:22,541 root INFO Temperatur Controller HK 1 Arbeitszimmer gestartet.
+18:13:22,541 root INFO Folgende Controller sind jetzt aktiv:
+18:13:22,541 root INFO =====================================
+18:13:22,541 root INFO >>>> : 1 / HK 1 Arbeitszimmer
+18:13:22,564 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:13:22,589 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:13:27,607 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:13:27,629 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:45:27,356 root INFO Running Decarbonara 
+18:45:27,361 asyncio DEBUG Using selector: KqueueSelector
+18:45:27,371 root INFO Running Decarbonara 
+18:45:27,374 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 1 hinzugefügt.
+18:45:27,380 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 2 hinzugefügt.
+18:45:27,381 root INFO Temperatur Controller HK 1 Arbeitszimmer gestartet.
+18:45:27,381 root INFO Folgende Controller sind jetzt aktiv:
+18:45:27,382 root INFO =====================================
+18:45:27,382 root INFO >>>> : 1 / HK 1 Arbeitszimmer
+18:45:27,410 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:45:27,440 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:45:32,461 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:45:32,494 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:45:37,517 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:45:37,541 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:45:42,568 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:45:42,592 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:45:47,609 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:45:47,643 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:45:52,665 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:45:52,689 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:46:16,681 root INFO Running Decarbonara 
+18:46:16,686 asyncio DEBUG Using selector: KqueueSelector
+18:46:16,695 root INFO Running Decarbonara 
+18:46:16,698 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 1 hinzugefügt.
+18:46:16,703 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 2 hinzugefügt.
+18:46:16,705 root INFO Temperatur Controller HK 1 Arbeitszimmer gestartet.
+18:46:16,705 root INFO Folgende Controller sind jetzt aktiv:
+18:46:16,705 root INFO =====================================
+18:46:16,705 root INFO >>>> : 1 / HK 1 Arbeitszimmer
+18:46:23,463 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:46:23,488 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:46:44,899 root INFO Running Decarbonara 
+18:46:44,905 asyncio DEBUG Using selector: KqueueSelector
+18:46:44,916 root INFO Running Decarbonara 
+18:46:44,920 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 1 hinzugefügt.
+18:46:44,925 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 2 hinzugefügt.
+18:46:44,926 root INFO Temperatur Controller HK 1 Arbeitszimmer gestartet.
+18:46:44,927 root INFO Folgende Controller sind jetzt aktiv:
+18:46:44,927 root INFO =====================================
+18:46:44,927 root INFO >>>> : 1 / HK 1 Arbeitszimmer
+18:46:50,686 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:46:50,714 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:48:44,785 root INFO Running Decarbonara 
+18:48:44,789 asyncio DEBUG Using selector: KqueueSelector
+18:48:44,801 root INFO Running Decarbonara 
+18:48:44,804 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 1 hinzugefügt.
+18:48:49,683 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 1 hinzugefügt.
+18:48:52,949 root INFO Temperatur Controller HK 1 Arbeitszimmer gestartet.
+18:48:52,949 root INFO Folgende Controller sind jetzt aktiv:
+18:48:57,181 root INFO =====================================
+18:48:57,181 root INFO >>>> : 1 / HK 1 Arbeitszimmer
+18:48:57,208 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:48:57,233 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:48:57,249 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:48:57,277 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:49:07,583 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:49:07,609 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:49:07,627 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:49:07,650 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:49:12,680 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:49:12,704 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:49:12,719 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:49:12,743 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:49:17,762 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:49:17,794 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:49:17,811 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:49:17,834 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:50:03,214 root INFO Running Decarbonara 
+18:50:03,218 asyncio DEBUG Using selector: KqueueSelector
+18:50:03,227 root INFO Running Decarbonara 
+18:50:03,230 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 1 hinzugefügt.
+18:50:03,236 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 1 hinzugefügt.
+18:50:03,240 root INFO Temperatur Controller HK 1 Arbeitszimmer gestartet.
+18:50:03,240 root INFO Folgende Controller sind jetzt aktiv:
+18:50:03,240 root INFO =====================================
+18:50:03,240 root INFO >>>> : 1 / HK 1 Arbeitszimmer
+18:50:03,274 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:50:03,299 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1417 HTTP/1.1" 200 103
+18:50:03,315 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:50:03,338 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:50:08,360 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:50:08,384 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1417 HTTP/1.1" 200 103
+18:50:08,400 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:50:08,424 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:50:13,442 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:50:13,473 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1417 HTTP/1.1" 200 103
+18:50:13,489 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:50:13,513 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:50:18,542 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:50:18,567 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1417 HTTP/1.1" 200 103
+18:50:18,583 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:50:18,608 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:52:12,785 root INFO Running Decarbonara 
+18:52:12,790 asyncio DEBUG Using selector: KqueueSelector
+18:52:12,798 root INFO Running Decarbonara 
+18:52:12,801 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 1 hinzugefügt.
+18:52:12,806 root INFO Sensor 2022-10-05 22:00:00.000000 Typ: 1 hinzugefügt.
+18:52:12,811 root INFO Temperatur Controller HK 1 Arbeitszimmer gestartet.
+18:52:12,811 root INFO Folgende Controller sind jetzt aktiv:
+18:52:12,811 root INFO =====================================
+18:52:12,811 root INFO >>>> : 1 / HK 1 Arbeitszimmer
+18:52:12,845 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:52:12,871 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1417 HTTP/1.1" 200 103
+18:52:12,888 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:52:12,909 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:52:17,927 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:52:17,960 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1417 HTTP/1.1" 200 103
+18:52:17,976 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:52:17,999 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
+18:52:23,16 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:52:23,45 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1417 HTTP/1.1" 200 103
+18:52:23,60 urllib3.connectionpool DEBUG Starting new HTTP connection (1): pi001:80
+18:52:23,82 urllib3.connectionpool DEBUG http://pi001:80 "GET /addons/xmlapi/state.cgi?datapoint_id=1467 HTTP/1.1" 200 103
