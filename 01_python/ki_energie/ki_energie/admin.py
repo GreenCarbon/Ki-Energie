@@ -1,8 +1,14 @@
 from django.contrib import admin
 
-from .models import Adressen
-
 # Register your models here.
 from ki_energie.models import *
 
-admin.site.register(Adressen)
+#from .models import *
+
+admin.site.register(AuwStatkurven)
+admin.site.register(Geraete)
+admin.site.register(Geraete2Kunde)
+admin.site.register(ImportMesswerte)
+admin.site.register(ImportboxFehlerlog)
+admin.site.register(KiParams)
+admin.site.register(KiRgActor)
