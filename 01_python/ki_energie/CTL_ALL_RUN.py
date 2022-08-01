@@ -47,12 +47,24 @@ try:
         name = getattr(ctl, "name") 
         typ_id = getattr(ctl, "typen_id") # Type = 1 = Temperatursteuerung
         actor_typ = getattr(KiRgTypen.objects.filter(id = Id).first(), "typ_name")
+        #### Fehler abfangen wenn der Typ nicht existiert 
         
-        #### Typ noch aus typ_id lesen! 
         if (typ_id == 1):
             aktor = Temperatur_Aktor(int(Id), name)
             ctl_list.append(aktor)
             logging.info(actor_typ + " Controller " + name + " gestartet.")
+        if (typ_id == 2):
+            aktor = Feuchte_Aktor(int(Id), name)
+            ctl_list.append(aktor)
+            logging.info(actor_typ + " Controller " + name + " gestartet.")
+        if (typ_id == 3):
+            aktor = Helligkeit_Aktor(int(Id), name)
+            ctl_list.append(aktor)
+            logging.info(actor_typ + " Controller " + name + " gestartet.")
+        if (typ_id == 4):
+            aktor = Leistung_Aktor(int(Id), name)
+            ctl_list.append(aktor)
+            logging.info(actor_typ + " Controller " + name + " gestartet.")    
         
 
 except mysql.connector.Error as error:

@@ -13,6 +13,7 @@
 # python3 manage.py migrate ki_energie      
 ##################################################
 
+from ipaddress import ip_address
 from pickle import TRUE
 from django.db import models
 from django.urls import reverse
@@ -45,8 +46,14 @@ class Geraete(models.Model):
     geraete_art = models.CharField(max_length=50, blank=True, null=True)
     dns_name = models.CharField(max_length=60, blank=True, null=True)
     seriennummer = models.CharField(max_length=50, blank=True, null=True)
+    hw_hersteller = models.CharField(max_length=50, blank=True, null=True)
     hw_version = models.CharField(max_length=35, blank=True, null=True)
     sw_version = models.CharField(max_length=35, blank=True, null=True)
+    connection = models.CharField(max_length=200, blank=True, null=True)
+    ip_address = models.CharField(max_length=30, blank=True, null=True)
+    ip_port = models.CharField(max_length=5, blank=True, null=True)
+    get_request = models.CharField(max_length=300, blank=True, null=True)
+    put_request = models.CharField(max_length=300, blank=True, null=True)
     bemerkung = models.CharField(max_length=100, blank=True, null=True)
     log_erzeugt_am = models.DateTimeField(blank=True, null=True)
     log_letzte_aenderung_am = models.DateTimeField(blank=True, null=True)
@@ -83,7 +90,9 @@ class Geraete2Kunde(models.Model):
 
 
 class ImportMesswerte(models.Model):
+    
     use_in_migrations = True
+    
     id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
     log_datum_vom = models.DateTimeField(blank=True, null=True)
     server_name = models.CharField(max_length=20, blank=True, null=True)
@@ -161,6 +170,7 @@ class KiRgActorSensor(models.Model):
 
 class KiRgData(models.Model):
     use_in_migrations = True
+    
     id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
     sequence = models.BigIntegerField(blank=True, null=True)
     aktor_id = models.BigIntegerField(blank=True, null=True)
@@ -260,12 +270,70 @@ class Raumliste(models.Model):
     etage = models.CharField(max_length=50, blank=True, null=True)
     raum = models.CharField(max_length=50, blank=True, null=True)
     beschreibung = models.CharField(max_length=100, blank=True, null=True)
-    wunsch_temperatur = models.DecimalField(max_digits=4, decimal_places=1, blank=True, null=True)
-    wunsch_luftfeuchte = models.DecimalField(max_digits=4, decimal_places=1, blank=True, null=True)
-    groesse_qm = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
-    raumhoehe = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
+    wunsch_temperatur = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
+    wunsch_luftfeuchte = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
+    groesse_qm = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    raumhoehe = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     anzahl_sensoren = models.SmallIntegerField(blank=True, null=True)
     nutzungsbeschreibung = models.CharField(max_length=100, blank=True, null=True)
     log_erzeugt_am = models.DateTimeField(blank=True, null=True)
     log_letzte_änderung_am = models.DateTimeField(blank=True, null=True)
 
+    
+
+class Adressen(models.Model):
+    use_in_migrations = True
+    
+    vorname = models.CharField(max_length=50)
+    nachname = models.CharField(max_length=50)
+    strasse = models.CharField(max_length=200)
+    plz = models.IntegerField()
+    ort = models.CharField(max_length=100)
+
+    
+
+    def __str__(self):
+        return self.nachname
+
+    def get_absolute_url(self):
+        return reverse("adress_detail", args=[str(self.id)])
+    
+    
+class SensorValueTypes(models.Model):
+    use_in_migrations = True
+    id = models.AutoField(db_column='Id', primary_key=True)  
+    kategorie = models.CharField(max_length=1, blank=True, null=True)  #T, F, L, H
+    kategorie_name = models.CharField(max_length=50, blank=True, null=True) #Temperatur, Feuchte, Leistung, Helligkeit
+    sub_kategorie = models.CharField(max_length=1, blank=True, null=True)  #Vorlauf, Rücklauf, Raum,
+    sub_kategorie_name = models.CharField(max_length=50, blank=True, null=True) #Temperatur, Feuchte, Leistung, Helligkeit
+    soll_ist_value = models.CharField(max_length=1, blank=True, null=True)  #S, I
+    inside_outside = models.CharField(max_length=1, blank=True, null=True)  #I, O
+    pri_sec = models.CharField(max_length=1, blank=True, null=True)  #P(rimary), S(econdary)
+    medium = models.CharField(max_length=20, blank=True, null=True)  #Wasser, Luft, usw
+    bemerkung = models.CharField(max_length=500, blank=True, null=True)
+    log_erzeugt_am = models.DateTimeField(blank=True, null=True)
+    log_letzte_aenderung_am = models.DateTimeField(blank=True, null=True)
+    
+class ErgAnalyse(models.Model):
+        
+    use_in_migrations = True
+    
+    id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
+    messwert_id = models.BigIntegerField(blank=False, null=True) # Primär immer nach Raum sortiert, Raum aus raumliste
+    raum_id = models.BigIntegerField(blank=False, null=False) # Primär immer nach Raum sortiert, Raum aus raumliste
+    periode = models.BigIntegerField(blank=False, null=False) # Fortlaufenden Nummerierung der Periode
+    periode_typ = models.BigIntegerField(blank=False, null=False) # typ aus Periodentyp
+    von_date_time = models.DateTimeField(blank=False, null=True) # Beginn
+    bis_date_time = models.DateTimeField(blank=False, null=True) # Ende
+    wert_typ = models.BigIntegerField(blank=False, null=False) # Typ aus kirgtypen
+    tgt_val = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
+    min_val = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
+    max_val = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
+    rise_time= models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
+    max_rise = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
+    min_rise = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
+    goodness = models.BigIntegerField(blank=False, null=False) # Wert von 1..10, 1 = Gut, 10 = Schlecht
+    optimum_percent = models.BigIntegerField(blank=False, null=False) # Gegenüberstellung zur optimalen Kennlinie
+    log_datum_vom = models.DateTimeField(blank=True, null=True)
+    
+    
