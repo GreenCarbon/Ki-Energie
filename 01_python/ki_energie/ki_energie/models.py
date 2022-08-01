@@ -13,7 +13,6 @@
 # python3 manage.py migrate ki_energie      
 ##################################################
 
-from ipaddress import ip_address
 from pickle import TRUE
 from django.db import models
 from django.urls import reverse
@@ -46,14 +45,8 @@ class Geraete(models.Model):
     geraete_art = models.CharField(max_length=50, blank=True, null=True)
     dns_name = models.CharField(max_length=60, blank=True, null=True)
     seriennummer = models.CharField(max_length=50, blank=True, null=True)
-    hw_hersteller = models.CharField(max_length=50, blank=True, null=True)
     hw_version = models.CharField(max_length=35, blank=True, null=True)
     sw_version = models.CharField(max_length=35, blank=True, null=True)
-    connection = models.CharField(max_length=200, blank=True, null=True)
-    ip_address = models.CharField(max_length=30, blank=True, null=True)
-    ip_port = models.CharField(max_length=5, blank=True, null=True)
-    get_request = models.CharField(max_length=300, blank=True, null=True)
-    put_request = models.CharField(max_length=300, blank=True, null=True)
     bemerkung = models.CharField(max_length=100, blank=True, null=True)
     log_erzeugt_am = models.DateTimeField(blank=True, null=True)
     log_letzte_aenderung_am = models.DateTimeField(blank=True, null=True)
@@ -90,9 +83,7 @@ class Geraete2Kunde(models.Model):
 
 
 class ImportMesswerte(models.Model):
-    
     use_in_migrations = True
-    
     id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
     log_datum_vom = models.DateTimeField(blank=True, null=True)
     server_name = models.CharField(max_length=20, blank=True, null=True)
@@ -170,7 +161,6 @@ class KiRgActorSensor(models.Model):
 
 class KiRgData(models.Model):
     use_in_migrations = True
-    
     id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
     sequence = models.BigIntegerField(blank=True, null=True)
     aktor_id = models.BigIntegerField(blank=True, null=True)

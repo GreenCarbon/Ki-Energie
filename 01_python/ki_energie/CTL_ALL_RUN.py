@@ -53,18 +53,6 @@ try:
             aktor = Temperatur_Aktor(int(Id), name)
             ctl_list.append(aktor)
             logging.info(actor_typ + " Controller " + name + " gestartet.")
-        if (typ_id == 2):
-            aktor = Feuchte_Aktor(int(Id), name)
-            ctl_list.append(aktor)
-            logging.info(actor_typ + " Controller " + name + " gestartet.")
-        if (typ_id == 3):
-            aktor = Helligkeit_Aktor(int(Id), name)
-            ctl_list.append(aktor)
-            logging.info(actor_typ + " Controller " + name + " gestartet.")
-        if (typ_id == 4):
-            aktor = Leistung_Aktor(int(Id), name)
-            ctl_list.append(aktor)
-            logging.info(actor_typ + " Controller " + name + " gestartet.")    
         
 
 except mysql.connector.Error as error:
