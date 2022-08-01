@@ -55,7 +55,7 @@ ROOT_URLCONF = 'ki_energie.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,7 +78,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
-            'read_default_file': '/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/01_python/ki_energie/ki_energie/my.cnf',
+            'read_default_file': '/Users/Ingo/Decarbonara/01_Workspace_GIT/01_python/ki_energie/ki_energie/my.cnf',
+          #  'read_default_file': '/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/01_python/ki_energie/ki_energie/my.cnf',
         }
     }
 }

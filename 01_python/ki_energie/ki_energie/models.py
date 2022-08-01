@@ -269,22 +269,3 @@ class Raumliste(models.Model):
     log_erzeugt_am = models.DateTimeField(blank=True, null=True)
     log_letzte_änderung_am = models.DateTimeField(blank=True, null=True)
 
-    
-
-class Adressen(models.Model):
-    use_in_migrations = True
-    
-    vorname = models.CharField(max_length=50)
-    nachname = models.CharField(max_length=50)
-    strasse = models.CharField(max_length=200)
-    plz = models.IntegerField()
-    ort = models.CharField(max_length=100)
-
-    
-
-    def __str__(self):
-        return self.nachname
-
-    def get_absolute_url(self):
-        return reverse("adress_detail", args=[str(self.id)])
-    
