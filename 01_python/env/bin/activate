@@ -38,7 +38,8 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/01_python/env"
+VIRTUAL_ENV="/Users/Ingo/Decarbonara/01_Workspace_GIT/01_python/env"
+# VIRTUAL_ENV="/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/01_python/env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
