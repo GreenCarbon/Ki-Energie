@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -76,12 +76,19 @@ WSGI_APPLICATION = 'ki_energie.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+db_config = ""
+if os.path.exists("/Users/Ingo/Decarbonara/"):
+    db_config =  '/Users/Ingo/Decarbonara/01_Workspace_GIT/01_python/ki_energie/ki_energie/my.cnf'
+else:    
+    db_config =  '/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/01_python/ki_energie/ki_energie/my.cnf'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
           #  'read_default_file': '/Users/Ingo/Decarbonara/01_Workspace_GIT/01_python/ki_energie/ki_energie/my.cnf',
-            'read_default_file': '/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/01_python/ki_energie/ki_energie/my.cnf',
+          #  'read_default_file': '/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/01_python/ki_energie/ki_energie/my.cnf',
+          'read_default_file': db_config
         }
     }
 }
