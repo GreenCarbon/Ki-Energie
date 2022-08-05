@@ -62,3 +62,9 @@ pyloxone-api
 Log.txt
 Config.ini
 01_python/ki_energie/settings.py
+*.pyc
+*.pyc
+01_python/ki_energie/__pycache__/INT_Classes.cpython-310.pyc
+01_python/ki_energie/__pycache__/INT_Classes.cpython-310.pyc
+01_python/ki_energie/__pycache__/SQL_Tools.cpython-310.pyc
+*.pyc

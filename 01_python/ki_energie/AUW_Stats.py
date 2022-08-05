@@ -54,7 +54,7 @@ def write_stat_rec(Id1, Id2, From_Datum, From_Time, To_Datum, To_Time, Start_val
 ############ Einstieg Hauptprogramm
 
 # Ergebnistabelle aufbauen
-sql_anweisung = """SELECT Id,log_datum_vom, wert_num FROM import_messwerte 
+sql_anweisung = """SELECT Id,log_datum_vom, wert_num FROM ki_energie_importmesswerte 
                         WHERE server_name = %s AND etage = %s AND raum = %s AND sensorklasse = %s AND name_des_wertes = %s 
                               AND log_datum_vom >= DATE(%s) AND log_datum_vom < DATE(%s)
                         ORDER BY Id, log_datum_vom"""

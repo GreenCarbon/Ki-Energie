@@ -58,11 +58,11 @@ def button_action():
 def call_cb_etage(event):
     sql_etage = event.widget.get()
     #fehler.set('Ich bin hier')
-    sql_anweisung = """SELECT DISTINCT raum FROM import_messwerte
+    sql_anweisung = """SELECT DISTINCT raum FROM ki_energie_importmesswerte
                        WHERE etage = %s
                        ORDER BY raum"""
     sql_werte = (sql_etage,)
-    a_raum = db_select(sql_anweisung, sql_werte, "import_messwerte")
+    a_raum = db_select(sql_anweisung, sql_werte, "ki_energie_importmesswerte")
     cb_raum['values'] = a_raum
     if len(a_raum) == 1:
         cb_raum.current(0)
@@ -76,7 +76,7 @@ def graf_erzeugen(p_server_name, p_etage, p_raum, p_sensorklasse, p_name_des_wer
         plus_1tag = timedelta(1)
         dat_datum_bis = datetime.strptime(p_datum_bis, "%Y-%m-%d") 
         sql_datum_bis = dat_datum_bis + plus_1tag
-        sql_anweisung = """SELECT * FROM import_messwerte 
+        sql_anweisung = """SELECT * FROM ki_energie_importmesswerte 
                         WHERE server_name = %s AND etage = %s AND raum = %s AND sensorklasse = %s AND name_des_wertes = %s 
                               AND log_datum_vom >= DATE(%s) AND log_datum_vom < DATE(%s)
                         ORDER BY log_datum_vom"""
@@ -98,7 +98,7 @@ def graf_erzeugen(p_server_name, p_etage, p_raum, p_sensorklasse, p_name_des_wer
             ywerte.append(ywerte_init)
 
     except mysql.connector.Error as error:
-        fehler.set("Fehler beim Lesen der Tabelle import_messwerte: {}".format(error))
+        fehler.set("Fehler beim Lesen der Tabelle ki_energie_importmesswerte: {}".format(error))
 
     #fig = Figure(figsize=(7, 15), dpi=110)
     #plot1 = fig.add_subplot(1,1,1)
@@ -220,9 +220,9 @@ l_fehlerzeile = Label(i_fenster, text="Fehlerblock", fg='red', textvariable=fehl
 
 p1 = tk.StringVar()
 cb_server_name = ttk.Combobox(i_fenster, width=20, height=25, textvariable=p1)
-sql_anweisung = """SELECT DISTINCT server_name FROM import_messwerte
+sql_anweisung = """SELECT DISTINCT server_name FROM ki_energie_importmesswerte
                    ORDER BY server_name"""
-a_server_name = db_select(sql_anweisung, None, "import_messwerte")
+a_server_name = db_select(sql_anweisung, None, "ki_energie_importmesswerte")
 cb_server_name['values'] = a_server_name
 cb_server_name.place(x=250, y=90)
 if len(a_server_name) == 1:
@@ -230,9 +230,9 @@ if len(a_server_name) == 1:
 
 p2 = tk.StringVar()
 cb_etage = ttk.Combobox(i_fenster, width=20, height=25, textvariable=p2)
-sql_anweisung = """SELECT DISTINCT etage FROM import_messwerte
+sql_anweisung = """SELECT DISTINCT etage FROM ki_energie_importmesswerte
                    ORDER BY etage"""
-a_etage = db_select(sql_anweisung, None, "import_messwerte")
+a_etage = db_select(sql_anweisung, None, "ki_energie_importmesswerte")
 cb_etage['values'] = a_etage
 cb_etage.place(x=250, y=120)
 cb_etage.bind("<<ComboboxSelected>>", call_cb_etage)
@@ -241,9 +241,9 @@ if len(a_etage) == 1:
 
 p3 = tk.StringVar()
 cb_raum = ttk.Combobox(i_fenster, width=20, height=25, textvariable=p3)
-sql_anweisung = """SELECT DISTINCT raum FROM import_messwerte
+sql_anweisung = """SELECT DISTINCT raum FROM ki_energie_importmesswerte
                    ORDER BY raum"""
-a_raum = db_select(sql_anweisung, None, "import_messwerte")
+a_raum = db_select(sql_anweisung, None, "ki_energie_importmesswerte")
 cb_raum['values'] = a_raum
 cb_raum.place(x=250, y=150)
 if len(a_raum) == 1:
@@ -251,9 +251,9 @@ if len(a_raum) == 1:
 
 p4 = tk.StringVar()
 cb_sensorklasse = ttk.Combobox(i_fenster, width=20, height=25, textvariable=p4)
-sql_anweisung = """SELECT DISTINCT sensorklasse FROM import_messwerte
+sql_anweisung = """SELECT DISTINCT sensorklasse FROM ki_energie_importmesswerte
                    ORDER BY sensorklasse"""
-a_sensorklasse = db_select(sql_anweisung, None, "import_messwerte")
+a_sensorklasse = db_select(sql_anweisung, None, "ki_energie_importmesswerte")
 cb_sensorklasse['values'] = a_sensorklasse
 cb_sensorklasse.place(x=250, y=180)
 if len(a_sensorklasse) == 1:
@@ -261,18 +261,18 @@ if len(a_sensorklasse) == 1:
 
 p5 = tk.StringVar()
 cb_name_des_wertes = ttk.Combobox(i_fenster, width=20, height=25, textvariable=p5)
-sql_anweisung = """SELECT DISTINCT name_des_wertes FROM import_messwerte
+sql_anweisung = """SELECT DISTINCT name_des_wertes FROM ki_energie_importmesswerte
                    ORDER BY name_des_wertes"""
-a_name_des_wertes = db_select(sql_anweisung, None, "import_messwerte")
+a_name_des_wertes = db_select(sql_anweisung, None, "ki_energie_importmesswerte")
 cb_name_des_wertes['values'] = a_name_des_wertes
 cb_name_des_wertes.place(x=250, y=210)
 #if len(a_name_des_wertes) == 1:
 cb_name_des_wertes.current(0)
 
-sql_anweisung = """SELECT DISTINCT DATE_FORMAT(log_datum_vom, '%Y-%m-%d') AS datum FROM import_messwerte
+sql_anweisung = """SELECT DISTINCT DATE_FORMAT(log_datum_vom, '%Y-%m-%d') AS datum FROM ki_energie_importmesswerte
                    GROUP BY datum 
                    ORDER BY datum"""
-a_zeitraum = db_select(sql_anweisung, None, "import_messwerte")
+a_zeitraum = db_select(sql_anweisung, None, "ki_energie_importmesswerte")
 
 p6 = tk.StringVar()
 cb_zeitreaum_von = ttk.Combobox(i_fenster, width=20, height=25, textvariable=p6)

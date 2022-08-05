@@ -108,7 +108,7 @@ def insert_log_zeile(zeile, p_datei, p_satznummer, anzahl_fehler):
         insert_log_zeile_config(zeile, p_datei, p_satznummer)
 
 
-# --- Routine erzeugt eine Zeile mit Messwerten in Tabelle import_messwerte
+# --- Routine erzeugt eine Zeile mit Messwerten in Tabelle ki_energie_importmesswerte
 def insert_log_zeile_messwert(zeile, p_datei, p_satznummer, anzahl_fehler):
     
     zeile_ary = []
@@ -154,7 +154,7 @@ def insert_log_zeile_messwert(zeile, p_datei, p_satznummer, anzahl_fehler):
     if satz_kann_geschrieben_werden:
         
         try:
-            sql_anweisung = """INSERT INTO import_messwerte (log_datum_vom, server_name, etage, raum, geraete_name, 
+            sql_anweisung = """INSERT INTO ki_energie_importmesswerte (log_datum_vom, server_name, etage, raum, geraete_name, 
                                 name_des_wertes, wert_num, wert_bit, wert_str, sensorklasse, name_sensorklasse)
                                VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
             sql_werte = (l_log_datum_vom, l_server_name, l_etage, l_raum, l_geraete_name,
@@ -165,7 +165,7 @@ def insert_log_zeile_messwert(zeile, p_datei, p_satznummer, anzahl_fehler):
             #print("Alle Daten wurden fehlerfrei importiert")
 
         except mysql.connector.Error as error:
-            print("Fehler beim Schreiben in die import_messwerte: {}".format(error))
+            print("Fehler beim Schreiben in die ki_energie_importmesswerte: {}".format(error))
             kein_fehler_gefunden = False
                 
     return kein_fehler_gefunden
