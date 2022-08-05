@@ -9,13 +9,3 @@ class Migration(migrations.Migration):
         ('ki_energie', '0001_initial'),
     ]
 
-    operations = [
-        migrations.DeleteModel(
-            name='Geraete2',
-        ),
-        migrations.AlterField(
-            model_name='kirgsensor',
-            name='name',
-            field=models.CharField(blank=True, max_length=500, null=True),
-        ),
-    ]

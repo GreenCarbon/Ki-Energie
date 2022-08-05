@@ -1,0 +1,15 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Auswertung der Importwerte</h2>
+<form action="" method="post"> 
+    {% csrf_token %}
+    <ul>
+        {% for ImportMesswerte in object_list %}
+        <li><a href="#">{{ ImportMesswerte.server_name }} {{ ImportMesswerte.etage }}</a></li>
+        {% endfor %}
+    </ul>
+    <a class="btn btn-success btn-sm" href="#">+ Neuen Importwert hinzufügen</a>
+</form>
+{% endblock content %}
