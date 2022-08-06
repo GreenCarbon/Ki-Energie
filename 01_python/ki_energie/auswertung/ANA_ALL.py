@@ -17,9 +17,9 @@ from sympy import cancel, false
 
 
 # Import Anweisungen für interne Klassen & Files
-from INT_Classes import *
+from ki_energie.INT_Classes import *
 # Import Anweisungen für interne Klassen & Files
-from SQL_Tools import *
+from ki_energie.SQL_Tools import *
 # Django Framework
 from django.db import models
 import sys 
@@ -29,7 +29,7 @@ import ki_energie.settings
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ki_energie.settings')
 django.setup()
 from ki_energie.models import *
-from CTL_Aktor_Sensor import *
+from rpi.CTL_Aktor_Sensor import *
 from ki_energie.models import ImportMesswerte; ErgAnalyse
 
 SystemInit()
@@ -44,7 +44,7 @@ try:
 # Bei 2 aufeinander folgenden messwerden wird der jeweils vorhergehende eliminiert, es sei denn es handelt sich um eine Richtungsumkehr
 # Richtungsumkehr muss innerhalb von 15 min definitiv erfolgt und durch 2 Messwerte bestätigt werden    
     erg_id = ErgAnalyse.objects.values('id')
-    messwerte = ImportMesswerte.objects.order_by('server_name', 'raum', 'geraete_name', 'log_datum_vom')
+    messwerte = ImportMesswerte.objects.order_by('server_name', 'raum', 'geraete_name', 'log_datum_vom')[:100]
     
     first = True
     write = False

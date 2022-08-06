@@ -21,9 +21,9 @@ import logging
 from CTL_Aktor_Sensor import *
 
 # Import Anweisungen für interne Klassen & Files
-from INT_Classes import *
+from ki_energie.INT_Classes import *
 # Import Anweisungen für interne Klassen & Files
-from SQL_Tools import *
+from ki_energie.SQL_Tools import *
 
 SystemInit()
 logger = initLogger('root')

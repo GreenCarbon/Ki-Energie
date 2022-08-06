@@ -1,6 +1,6 @@
 
 import mysql.connector
-from CTL_Aktor_Sensor import *
+from rpi.CTL_Aktor_Sensor import *
 import os
 from datetime import *
 import logging 
@@ -25,9 +25,9 @@ from django.core.asgi import get_asgi_application
 from ki_energie.wsgi import *
 
 # Import Anweisungen für interne Klassen & Files
-from INT_Classes import *
+from ki_energie.INT_Classes import *
 # Import Anweisungen für interne Klassen & Files
-from SQL_Tools import *
+from ki_energie.SQL_Tools import *
 
 SystemInit()
 logger = initLogger('root')

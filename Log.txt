@@ -868,3 +868,12 @@
 14:42:20,676 asyncio DEBUG Using selector: KqueueSelector
 14:57:24,745 root INFO Running Decarbonara 
 14:57:24,751 asyncio DEBUG Using selector: KqueueSelector
+16:04:42,54 root INFO Running Decarbonara 
+16:05:25,268 root INFO Running Decarbonara 
+16:05:25,332 matplotlib.pyplot DEBUG Loaded backend macosx version unknown.
+16:22:36,739 root INFO Running Decarbonara 
+16:22:36,754 matplotlib.pyplot DEBUG Loaded backend macosx version unknown.
+16:23:35,617 root INFO Running Decarbonara 
+16:23:35,626 matplotlib.pyplot DEBUG Loaded backend macosx version unknown.
+16:25:08,893 root INFO Running Decarbonara 
+16:25:12,121 matplotlib.pyplot DEBUG Loaded backend macosx version unknown.

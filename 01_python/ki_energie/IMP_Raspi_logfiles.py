@@ -7,8 +7,8 @@ from tkinter import *
 
 
 # Import Anweisungen für interne Klassen & Files
-from INT_Classes import *
-from SQL_Tools import *
+from ki_energie.INT_Classes import *
+from ki_energie.SQL_Tools import *
 
 SystemInit()
 con = db_conn()
