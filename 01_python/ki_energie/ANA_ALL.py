@@ -16,10 +16,8 @@ import logging
 from sympy import cancel, false 
 
 
-# Import Anweisungen für interne Klassen & Files
-from ki_energie.INT_Classes import *
-# Import Anweisungen für interne Klassen & Files
-from ki_energie.SQL_Tools import *
+
+
 # Django Framework
 from django.db import models
 import sys 
@@ -29,7 +27,9 @@ import ki_energie.settings
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ki_energie.settings')
 django.setup()
 from ki_energie.models import *
-from rpi.CTL_Aktor_Sensor import *
+from CTL_Aktor_Sensor import *
+# Import Anweisungen für interne Klassen & Files
+from ki_energie.INT_Classes import *
 from ki_energie.models import ImportMesswerte; ErgAnalyse
 
 SystemInit()
@@ -44,8 +44,10 @@ try:
 # Bei 2 aufeinander folgenden messwerden wird der jeweils vorhergehende eliminiert, es sei denn es handelt sich um eine Richtungsumkehr
 # Richtungsumkehr muss innerhalb von 15 min definitiv erfolgt und durch 2 Messwerte bestätigt werden    
     erg_id = ErgAnalyse.objects.values('id')
-    messwerte = ImportMesswerte.objects.order_by('server_name', 'raum', 'geraete_name', 'log_datum_vom')[:100]
-    
+    wp = WorkValues()
+    from_id = wp.getWorkParam("Auswertung", "ImportMesswerte", "Status_id", "End" , 0)
+    nbr = wp.getWorkParam("Auswertung", "ImportMesswerte", "Status_id", "Records" , 0)
+    messwerte = ImportMesswerte.objects.filter(id__gt=from_id).order_by('server_name', 'raum', 'geraete_name', 'log_datum_vom')[:nbr]
     first = True
     write = False
     server_name = ""
@@ -61,10 +63,12 @@ try:
 #    print(messwerte)
 # Nur Messwerte übertragen wo der Wert sich geändert hat.     
     i = 0
+    lfd_id = 0
     for mw in messwerte:
         i+=1
         if i==100:
-            break
+            wp.saveWorkParam("Auswertung", "ImportMesswerte", "Status_id", "End" , 0, lfd_id)
+            i= 0
         write = False
         if (first):
             first = False
@@ -91,6 +95,7 @@ try:
             mwadd.bis_date_time = getattr(mw, "log_datum_vom")
             mwadd.log_datum_vom = str(datetime.now())
             mwadd.save()    
+            lfd_id = mwadd.id
             von_datum = getattr(mw, "log_datum_vom")      
         Id = getattr(mw, "id")  
         server_name = getattr(mw, "server_name") 
@@ -102,8 +107,9 @@ try:
         wert_num =getattr(mw, "wert_num") 
         #von_datum = getattr(mw, "log_datum_vom"
 #        print(Id, " ", server_name, " ", raum, " ", geraete_name,  " ", wert_str,  " ",wert_num)
-#--- Ende Datenübernahme        
- 
+#--- Ende Datenübernahme, letzte ID speichern sofern etwas verarbeitet wurde.        
+    if lfd_id > 0:
+        wp.saveWorkParam("Auswertung", "ImportMesswerte", "Status_id", "End" , 0, lfd_id)
     actors = KiRgActor.objects.filter(isactive = 1).filter(id= 1)
     for ctl in actors:
         Id = getattr(ctl, "id")  

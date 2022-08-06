@@ -1,5 +1,13 @@
-from SQL_Tools import *
-
+# Django Framework
+from django.db import models
+import sys 
+import os
+import django
+import ki_energie.settings
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ki_energie.settings')
+django.setup()
+from ki_energie.SQL_Tools import *
+from ki_energie.models import *
 from configparser import ConfigParser
 import logging 
 import os
@@ -94,10 +102,7 @@ def initLogger(name):
 
     return logger
     
-def saveWorkParam(app, modul, name, subname, typ):
-    value = ''
 
-    return value
     
 # Damit nicht ständig Ein- und ausgeschaltet wird, kann eine Hysterese festgelegt werden.     
 # Beisspiel hyst = Hysterese(21, 22)
@@ -258,4 +263,58 @@ class PID:
         """
         self.sample_time = sample_time    
         
+       
+class WorkValues:
+   
+    def __init__(self):
+        self.session = "EMPTY"
         
+    
+    def saveWorkParam(self, app, modul, name, subname, typ, val):
+        self.app = app
+        self.modul = modul
+        self.name = name
+        self.subname = subname
+        self.typ = typ 
+        # Prüfen ob es den Datensatz schon gibt, wenn nicht wird er angelegt, ansonsten wird der Satz angelegt / geschrieben
+        try:
+            wp = Workparameter.objects.get(app = app, modul = modul, name = name, subname = subname)
+        except Workparameter.DoesNotExist:
+            wp = Workparameter(app = app, modul = modul, name = name, subname = subname, typ = typ, int_val = val)
+            wp.save
+        # Update mit neuem Wert    
+        if typ == 0: #int-Value gesucht
+            Workparameter.objects.filter(app = app, modul = modul, name = name, subname = subname).update(typ = typ, int_val = val)
+        if typ == 1: #string-Value gesucht
+           Workparameter.objects.filter(app = app, modul = modul, name = name, subname = subname).update(typ = typ, str_val = val)
+        if typ == 2: #text-Value gesucht
+           Workparameter.objects.filter(app = app, modul = modul, name = name, subname = subname).update(typ = typ, text_val = val)
+        if typ == 3: #date-Value gesucht
+           Workparameter.objects.filter(app = app, modul = modul, name = name, subname = subname).update(typ = typ, date_val = val)
+        if typ == 4: #time-Value gesucht
+           Workparameter.objects.filter(app = app, modul = modul, name = name, subname = subname).update(typ = typ, time_val = val)
+        if typ == 5: #datetime-Value gesucht
+            Workparameter.objects.filter(app = app, modul = modul, name = name, subname = subname).update(typ = typ, datetime_val = val)
+            
+        
+        
+        
+    def getWorkParam(self, app, modul, name, subname, typ):
+        wp = Workparameter.objects.get(app = app, modul = modul, name = name, subname = subname)
+        
+        if typ == 0: #int-Value gesucht
+           return getattr(wp, "int_val")
+        if typ == 1: #string-Value gesucht
+           return getattr(wp, "str_val")
+        if typ == 2: #text-Value gesucht
+           return getattr(wp, "text_val")
+        if typ == 3: #date-Value gesucht
+           return getattr(wp, "date_val")
+        if typ == 4: #time-Value gesucht
+           return getattr(wp, "time_val")
+        if typ == 5: #datetime-Value gesucht
+           return getattr(wp, "datetime_val")
+        
+        return 0
+            
+      
