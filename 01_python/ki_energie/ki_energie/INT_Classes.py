@@ -94,6 +94,11 @@ def initLogger(name):
 
     return logger
     
+def saveWorkParam(app, modul, name, subname, typ):
+    value = ''
+
+    return value
+    
 # Damit nicht ständig Ein- und ausgeschaltet wird, kann eine Hysterese festgelegt werden.     
 # Beisspiel hyst = Hysterese(21, 22)
 #print(hyst.update(25))  # True bis 21 und False ab 22
@@ -252,3 +257,5 @@ class PID:
         Based on a pre-determined sampe time, the PID decides if it should compute or return immediately.
         """
         self.sample_time = sample_time    
+        
+        

@@ -336,4 +336,22 @@ class ErgAnalyse(models.Model):
     optimum_percent = models.BigIntegerField(blank=False, null=False) # Gegenüberstellung zur optimalen Kennlinie
     log_datum_vom = models.DateTimeField(blank=True, null=True)
     
+class Workparameter(models.Model):
+        
+    use_in_migrations = True
     
+    id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
+    app = models.CharField(max_length=50, blank=True, null=True) #Application (z.Bsp. ki_energie, rpi usw.)
+    modul = models.CharField(max_length=50, blank=True, null=True) # Modulbezeichnung (z.Bsp. Analyse, Frontend, Backend, usw )
+    name = models.CharField(max_length=100, blank=True, null=True) # Hauotname, kann auch der Programmteil sein, uz. Bsp. ANA_ALL 
+    subname = models.CharField(max_length=100, blank=True, null=True) #Untername z. Bsp. LAST_IMPORT_ID
+    typ = models.BigIntegerField(blank=False, null=False) # 0=int, 1=String, 2=Decimal, 3=Text, 4=Datum, 5=Zeit 6=Datetime
+    int_val = models.BigIntegerField(blank=False, null=True)
+    str_val = models.CharField(max_length=256, blank=True, null=True)
+    text_val = models.TextField(blank=True, null=True)
+    date_val = models.DateField(null=True)
+    time_val = models.TimeField(null=True)
+    datetime_val = models.DateTimeField(null=True)
+    comment = models.TextField() #Kommentarfeld
+    log_datum_vom = models.DateTimeField(blank=True, null=True)
+        
