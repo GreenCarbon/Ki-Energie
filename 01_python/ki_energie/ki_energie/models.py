@@ -265,7 +265,7 @@ class Kunde(models.Model):
 class Raumliste(models.Model):
     use_in_migrations = True
     
-    raum_id = models.AutoField(db_column='raum_Id', primary_key=True)  # Field name made lowercase.
+    id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
     server_name = models.CharField(max_length=20, blank=True, null=True)
     etage = models.CharField(max_length=50, blank=True, null=True)
     raum = models.CharField(max_length=50, blank=True, null=True)

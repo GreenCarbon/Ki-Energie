@@ -30,7 +30,7 @@ from ki_energie.models import *
 from CTL_Aktor_Sensor import *
 # Import Anweisungen für interne Klassen & Files
 from ki_energie.INT_Classes import *
-from ki_energie.models import ImportMesswerte; ErgAnalyse
+from ki_energie.models import *
 
 SystemInit()
 logger = initLogger('root')
@@ -38,7 +38,6 @@ con = db_conn()
 
 
 # Primäre Schleife: Alle Messwerte lesen
-
 try:
 # Erster Durchlauf: Ermittlung der Perioden und schreiben in Erg_Analyse
 # Bei 2 aufeinander folgenden messwerden wird der jeweils vorhergehende eliminiert, es sei denn es handelt sich um eine Richtungsumkehr
@@ -90,7 +89,16 @@ try:
             wert_typ = 0, tgt_val = 0, min_val = 0, max_val = 0, rise_time= 0, max_rise = 0, min_rise = 0, \
             goodness = 0, optimum_percent = 0)
             mwadd.messwert_id = getattr(mw, "id")
-            mwadd.raum_id = raum
+            
+            try:
+                r_name = getattr(mw, "raum")
+                rl = Raumliste.objects.get(raum = r_name)
+            except Raumliste.DoesNotExist:
+                rl1 = Raumliste.objects.order_by('-id').first()
+                new_id = getattr(rl1, "id") + 1
+                rl = Raumliste(raum_id = new_id, server_name = "PI???", etage = "???", raum = getattr(mw, "raum"), beschreibung = "*AUTOMATISCHE ANLAGE!")
+                rl.save()
+            mwadd.raum_id = getattr(rl, "id")
             mwadd.von_date_time = von_datum
             mwadd.bis_date_time = getattr(mw, "log_datum_vom")
             mwadd.log_datum_vom = str(datetime.now())
@@ -101,6 +109,7 @@ try:
         server_name = getattr(mw, "server_name") 
         #raum = getattr(mw, "raum")
         raum = 0
+        
         geraete_name =getattr(mw, "geraete_name")  
         wert_bit =getattr(mw, "wert_bit") 
         wert_str =getattr(mw, "wert_str") 
@@ -110,6 +119,7 @@ try:
 #--- Ende Datenübernahme, letzte ID speichern sofern etwas verarbeitet wurde.        
     if lfd_id > 0:
         wp.saveWorkParam("Auswertung", "ImportMesswerte", "Status_id", "End" , 0, lfd_id)
+        
     actors = KiRgActor.objects.filter(isactive = 1).filter(id= 1)
     for ctl in actors:
         Id = getattr(ctl, "id")  
