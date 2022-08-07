@@ -319,7 +319,7 @@ class ErgAnalyse(models.Model):
     use_in_migrations = True
     
     id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
-    messwert_id = models.BigIntegerField(blank=False, null=True) # Primär immer nach Raum sortiert, Raum aus raumliste
+    messwert_id = models.BigIntegerField(blank=False, null=True) # Enthält die ID des Wertes aus ImportMesswerte
     raum_id = models.BigIntegerField(blank=False, null=False) # Primär immer nach Raum sortiert, Raum aus raumliste
     periode = models.BigIntegerField(blank=False, null=False) # Fortlaufenden Nummerierung der Periode
     periode_typ = models.BigIntegerField(blank=False, null=False) # typ aus Periodentyp

@@ -36,7 +36,35 @@ SystemInit()
 logger = initLogger('root')
 con = db_conn()
 
+#----------------------------------------------------------------
+# Lokale Funktionsdefinitionen
+#----------------------------------------------------------------
+# Ermittlung und Rückgabe der der ID's aus der Tabellel KIRGTYPEN. ACHTUNG: Der Inhalt dieser Tabelle ist fix und sollte nicht verändert, nur ergänzt werden ! 
+def getValueType(sensorname):
+    
+    if sensorname == "ACTUAL_TEMPERATURE":
+        return 1
+    if sensorname == "SET_POINT_TEMPERATURE":
+        return 2
+    if sensorname == "HUMIDITY":
+        return 3
+    if sensorname == "ILLUMINATION":
+        return 4
+    if sensorname == "CURRENT ILLUMINATION":
+        return 4
+    if sensorname == "HIGHEST ILLUMINATION":
+        return 5
+    if sensorname == "LOWEST ILLUMINATION":
+        return 6
+    if sensorname == "CURRENT":
+        return 7
+    if sensorname == "MOTION":
+        return 8
+    
+    return  99 # Default Rückgabe ist 99 = Unbekannter Wertetyp
 
+
+#----------------------------------------------------------------
 # Primäre Schleife: Alle Messwerte lesen
 try:
 # Erster Durchlauf: Ermittlung der Perioden und schreiben in Erg_Analyse
@@ -99,6 +127,7 @@ try:
                 rl = Raumliste(raum_id = new_id, server_name = "PI???", etage = "???", raum = getattr(mw, "raum"), beschreibung = "*AUTOMATISCHE ANLAGE!")
                 rl.save()
             mwadd.raum_id = getattr(rl, "id")
+            mwadd.wert_typ = getValueType(getattr(mw, "name_des_wertes"))
             mwadd.von_date_time = von_datum
             mwadd.bis_date_time = getattr(mw, "log_datum_vom")
             mwadd.log_datum_vom = str(datetime.now())
@@ -158,6 +187,7 @@ for ctl in ctl:
 # Endlosschleife, alles andere erledigen die Hintergrundprozesse    
 while 2 > 1:    
     TIME.sleep(60)
+
 
 
         
