@@ -50,11 +50,11 @@ def getValueType(sensorname):
         return 3
     if sensorname == "ILLUMINATION":
         return 4
-    if sensorname == "CURRENT ILLUMINATION":
+    if sensorname == "CURRENT_ILLUMINATION":
         return 4
-    if sensorname == "HIGHEST ILLUMINATION":
+    if sensorname == "HIGHEST_ILLUMINATION":
         return 5
-    if sensorname == "LOWEST ILLUMINATION":
+    if sensorname == "LOWEST_ILLUMINATION":
         return 6
     if sensorname == "CURRENT":
         return 7
@@ -66,6 +66,10 @@ def getValueType(sensorname):
 
 #----------------------------------------------------------------
 # Primäre Schleife: Alle Messwerte lesen
+
+logdat = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+
 try:
 # Erster Durchlauf: Ermittlung der Perioden und schreiben in Erg_Analyse
 # Bei 2 aufeinander folgenden messwerden wird der jeweils vorhergehende eliminiert, es sei denn es handelt sich um eine Richtungsumkehr
@@ -117,14 +121,14 @@ try:
             wert_typ = 0, tgt_val = 0, min_val = 0, max_val = 0, rise_time= 0, max_rise = 0, min_rise = 0, \
             goodness = 0, optimum_percent = 0)
             mwadd.messwert_id = getattr(mw, "id")
-            
             try:
                 r_name = getattr(mw, "raum")
                 rl = Raumliste.objects.get(raum = r_name)
             except Raumliste.DoesNotExist:
                 rl1 = Raumliste.objects.order_by('-id').first()
                 new_id = getattr(rl1, "id") + 1
-                rl = Raumliste(raum_id = new_id, server_name = "PI???", etage = "???", raum = getattr(mw, "raum"), beschreibung = "*AUTOMATISCHE ANLAGE!")
+                logdat = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                rl = Raumliste(id = new_id, server_name = "PI???", etage = "???", raum = getattr(mw, "raum"), beschreibung = "*AUTOMATISCHE ANLAGE!", log_erzeugt_am = logdat)
                 rl.save()
             mwadd.raum_id = getattr(rl, "id")
             mwadd.wert_typ = getValueType(getattr(mw, "name_des_wertes"))
