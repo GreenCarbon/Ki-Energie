@@ -2,13 +2,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Auswertung der Importwerte</h2>
-<form action="" method="post"> 
-    {% csrf_token %}
 
-    {{form}}
-    
-    <input type="submit" value="Attacke">
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 col-md-offset-5">
+            <h2>Auswertung der Importwerte</h2>
+            <form action="" method="post"> 
+                {% csrf_token %}
+<!--
+                <table>
+                    {{ form.as_table }}
+                </table>
+-->
+                    {% for Raumliste in Erg %}
+                        {{ Raumliste.server_name }}
+                    {% endfor %}
+
+                <div class="form-group">
+                    <input type="submit" value="Attacke" >
+                </div>
 <!--    
     <label for="your_name">Dein Name: </label>
     <input id="your_name" type="text" name="your_name" value="{{ current_name }}">
@@ -20,5 +32,9 @@
     </ul>
     <a class="btn btn-success btn-sm" href="#">+ Neuen Importwert hinzufügen</a>
 -->
-</form>
+            </form>
+        </div>
+    </div>
+</div>
+
 {% endblock content %}
