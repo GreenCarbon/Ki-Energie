@@ -14,11 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from .views import start
-from .views import import_from_rpi
+from .views import startseite, importwerte, raumliste
 
 urlpatterns = [
-    path('', start.as_view(), name='Startseite'),
-    path('', import_from_rpi.as_view(), name='Import')
-    #path('', .as_view(), name='Startseite')
+    path('', startseite, name='startseite'),
+    path('import/', importwerte, name='importwerte'),
+    path('raum/', raumliste, name='raumliste')
 ]
