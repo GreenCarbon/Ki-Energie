@@ -265,7 +265,7 @@ class Kunde(models.Model):
 class Raumliste(models.Model):
     use_in_migrations = True
     
-    id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
+    id = models.AutoField(db_column='Id', primary_key=True, default = 0)  # Field name made lowercase.
     server_name = models.CharField(max_length=20, blank=True, null=True)
     etage = models.CharField(max_length=50, blank=True, null=True)
     raum = models.CharField(max_length=50, blank=True, null=True)
@@ -279,7 +279,17 @@ class Raumliste(models.Model):
     log_erzeugt_am = models.DateTimeField(blank=True, null=True)
     log_letzte_änderung_am = models.DateTimeField(blank=True, null=True)
 
+class RaumlisteInd1(models.Model):    
+    use_in_migrations = True
     
+    server_name = models.CharField(max_length=20, blank=True, null=True)
+    etage = models.CharField(max_length=50, blank=True, null=True)
+    raum = models.CharField(max_length=50, blank=True, null=True)
+    
+    #class Meta:
+    #    abstract = True
+    #    ordering = ['server_name', 'etage', 'raum']
+    #    db_table = 'ki_energie_raumliste'
 
 class Adressen(models.Model):
     use_in_migrations = True
