@@ -13,8 +13,10 @@
 # python3 manage.py migrate ki_energie      
 ##################################################
 
+from ctypes.wintypes import LANGID
 from ipaddress import ip_address
 from pickle import TRUE
+from re import S
 from django.db import models
 from django.urls import reverse
 from django.contrib.gis.db import models
@@ -236,28 +238,7 @@ class KiRgTypen(models.Model):
     
 
 
-class Kunde(models.Model):
-    use_in_migrations = True
-    
-    kunde_id = models.AutoField(db_column='kunde_Id', primary_key=True)  # Field name made lowercase.
-    anrede = models.CharField(max_length=5, blank=True, null=True)
-    titel = models.CharField(max_length=20, blank=True, null=True)
-    vorname = models.CharField(max_length=60, blank=True, null=True)
-    nachname = models.CharField(max_length=60, blank=True, null=True)
-    plz = models.CharField(max_length=5, blank=True, null=True)
-    ort = models.CharField(max_length=50, blank=True, null=True)
-    strasse = models.CharField(max_length=50, blank=True, null=True)
-    hausnummer = models.CharField(max_length=6, blank=True, null=True)
-    festnetz = models.CharField(max_length=60, blank=True, null=True)
-    faxnummer = models.CharField(max_length=60, blank=True, null=True)
-    mobil = models.CharField(max_length=60, blank=True, null=True)
-    mail = models.CharField(max_length=128, blank=True, null=True)
-    anmeldename = models.CharField(max_length=20, blank=True, null=True)
-    passwort = models.CharField(max_length=60, blank=True, null=True)
-    anmeldung_aktiv = models.TextField(blank=True, null=True)  # This field type is a guess.
-    bemerkung = models.CharField(max_length=100, blank=True, null=True)
-    log_erzeugt_am = models.DateTimeField(blank=True, null=True)
-    log_letzte_änderung_am = models.DateTimeField(blank=True, null=True)
+
 
     
 
@@ -300,7 +281,8 @@ class Adressen(models.Model):
     plz = models.IntegerField()
     ort = models.CharField(max_length=100)
 
-    
+    class Meta:
+        ordering = ['nachname', 'vorname']
 
     def __str__(self):
         return self.nachname
@@ -311,6 +293,7 @@ class Adressen(models.Model):
     
 class SensorValueTypes(models.Model):
     use_in_migrations = True
+    
     id = models.AutoField(db_column='Id', primary_key=True)  
     kategorie = models.CharField(max_length=1, blank=True, null=True)  #T, F, L, H
     kategorie_name = models.CharField(max_length=50, blank=True, null=True) #Temperatur, Feuchte, Leistung, Helligkeit
@@ -323,6 +306,9 @@ class SensorValueTypes(models.Model):
     bemerkung = models.CharField(max_length=500, blank=True, null=True)
     log_erzeugt_am = models.DateTimeField(blank=True, null=True)
     log_letzte_aenderung_am = models.DateTimeField(blank=True, null=True)
+    
+    class Meta:
+        ordering = ['sub_kategorie', 'sub_kategorie_name']
     
 class ErgAnalyse(models.Model):
         
@@ -347,7 +333,6 @@ class ErgAnalyse(models.Model):
     log_datum_vom = models.DateTimeField(blank=True, null=True)
     
 class Workparameter(models.Model):
-        
     use_in_migrations = True
     
     id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
@@ -364,4 +349,155 @@ class Workparameter(models.Model):
     datetime_val = models.DateTimeField(null=True)
     comment = models.TextField() #Kommentarfeld
     log_datum_vom = models.DateTimeField(blank=True, null=True)
+        
+    class Meta:
+        ordering = ['app', 'modul', 'name', 'subname']
+        
+#Stammdatentabellen
+# Server
+#   Typ, Seriennummer, Kunde, Gebäude, Etage, Ausstattung
+class Server(models.Model):
+    use_in_migrations = True
+    
+    id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
+    name = models.CharField(max_length=50, blank=True, null=True) #Server Name  (z.Bsp. PI0001)
+    kunde_id = models.BigIntegerField(blank=True, null=True) # Verknüpfung mit Tabelle Kunde
+    gebaeude_id  = models.BigIntegerField(blank=True, null=True) # Verknüpfung mit Tabelle Gebäude
+    etage_id  = models.BigIntegerField(blank=True, null=True) # Verknüpfung mit Tabelle Etage
+    raum_id  = models.BigIntegerField(blank=True, null=True) # Verknüpfung mit Tabelle Raum
+    montageort  = models.CharField(max_length=200, blank=True, null=True) # Wo steht der Server  (z.Bsp. Schrank 1, Fach 4)
+    serial_nbr  = models.CharField(max_length=50, blank=True, null=True) # Seriennummer des Servers
+    hw_version  = models.CharField(max_length=200, blank=True, null=True) # 4B, WLAN, 2GB usw.
+    os_system  = models.CharField(max_length=200, blank=True, null=True) # Operating System (Typ, Version usw.
+    os_version  = models.CharField(max_length=50, blank=True, null=True) # Version Operating System
+    last_update = models.DateTimeField(blank=True, null=True)
+    comment = models.TextField(blank=True, null=True) #Kommentarfeld
+    log_datum_vom = models.DateTimeField(blank=True, null=True)
+        
+    class Meta:
+        ordering = ['name']
+        
+
+# Gebäude
+class Gebaeude(models.Model):
+    use_in_migrations = True
+    
+    id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
+    name = models.CharField(max_length=50, blank=True, null=True) # Gebäudebezeichnung / Kennung
+    adress_id = models.BigIntegerField(blank=True, null=True) # Verknüpfung mit Adressen
+    comment = models.TextField(blank=True, null=True) #Kommentarfeld
+    log_datum_vom = models.DateTimeField(blank=True, null=True)
+    
+    class Meta:
+        ordering = ['name']
+    
+# Etagen
+class Etage(models.Model):
+    use_in_migrations = True
+ 
+    id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
+    name = models.CharField(max_length=50, blank=True, null=True) # Etage Nr, in besonderen Fällen auch ein Name)
+    gebaeude_id = models.BigIntegerField(blank=True, null=True) # Verknüpfung mit Tabelle Gebäude
+    comment = models.TextField(blank=True, null=True) #Kommentarfeld
+    log_datum_vom = models.DateTimeField(blank=True, null=True)
+    
+    class Meta:
+        ordering = ['name']
+
+# Adressen
+class Adressen(models.Model):
+    use_in_migrations = True
+ 
+    id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
+    strasse = models.CharField(max_length=200, blank=True, null=True) #
+    hausnummer = models.CharField(max_length=10, blank=True, null=True) #
+    postleitzahl = models.CharField(max_length=10, blank=True, null=True) #
+    iso_land = models.CharField(max_length=5, blank=True, null=True) #
+    land = models.CharField(max_length=200, blank=True, null=True) #
+    ort = models.CharField(max_length=200, blank=True, null=True) #
+    comment = models.TextField(blank=True, null=True) #Kommentarfeld
+    festnetz = models.CharField(max_length=60, blank=True, null=True)
+    faxnummer = models.CharField(max_length=60, blank=True, null=True)
+    mobil = models.CharField(max_length=60, blank=True, null=True)
+    mail = models.CharField(max_length=128, blank=True, null=True)
+    log_datum_vom = models.DateTimeField(blank=True, null=True)
+    
+    
+# Kunden
+class Kunde(models.Model):
+    use_in_migrations = True
+    
+    id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
+    adress_id = models.BigIntegerField(blank=True, null=True) # Verknüpfung it Tabelle Adressen
+    anrede = models.CharField(max_length=5, blank=True, null=True)
+    titel = models.CharField(max_length=20, blank=True, null=True)
+    vorname = models.CharField(max_length=60, blank=True, null=True)
+    nachname = models.CharField(max_length=60, blank=True, null=True)
+    anmeldename = models.CharField(max_length=20, blank=True, null=True)
+    passwort = models.CharField(max_length=60, blank=True, null=True)
+    anmeldung_aktiv = models.TextField(blank=True, null=True)  # This field type is a guess.
+    comment = models.TextField(blank=True, null=True) #Kommentarfeld
+    kunde_anlage = models.DateTimeField(blank=True, null=True)
+    comments_id = models.BigIntegerField(blank=True, null=True) # Verknüpfung mit Tabelle Status
+    log_datum_vom = models.DateTimeField(blank=True, null=True)
+    
+    class Meta:
+        ordering = ['nachname', 'vorname']
+
+
+# Freitexttabelle / Statusinfo
+class Status(models.Model):
+    use_in_migrations = True
+    
+    id = models.AutoField(db_column='id', primary_key=True)  # Field name made lowercase.
+    ext_typ = models.CharField(max_length=20, blank=True, null=True) #Name der Tabelle, z.Bsp. "Kunden" "Adresssen" "Server" usw.)
+    ext_id =models.BigIntegerField(blank=True, null=True) # externe id (z. Bps. Kunde, Adresse, Server etc.)
+    ext_lfd =models.BigIntegerField(blank=True, null=True) # Laufende Nummer innerhalb der etx_id
+    stat_typ = models.CharField(max_length=5, blank=True, null=True) # CRT = Anlage, FR1 = Freigabe, DEL = Löschung, AEN = Aenderung
+    stat_text = models.TextField(blank=True, null=True) # Freitext
+    log_datum_vom = models.DateTimeField(blank=True, null=True)
+    
+    
+    
+# Anmerkungen / Fehler / Behebungen / Wünsche / Kommunikation / Telefonate
+class Kommentar(models.Model):
+    use_in_migrations = True
+    
+    id = models.AutoField(db_column='id', primary_key=True)  # Field name made lowercase.
+    ext_typ = models.CharField(max_length=20, blank=True, null=True) #Name der Tabelle, z.Bsp. "Kunden" "Adresssen" "Server" usw.)
+    ext_id =models.BigIntegerField(blank=True, null=True) # externe id (z. Bps. Kunde, Adresse, Server etc.)
+    ext_lfd =models.BigIntegerField(blank=True, null=True) # Laufende Nummer
+    text = models.TextField(blank=True, null=True) # Kommentar
+    log_datum_vom = models.DateTimeField(blank=True, null=True)
+
+
+# Dokumentenablage
+# PDF's etc. anhängen zu Kunde, Server. Ablage im Verzeichnis, Dateiname
+class Dokumente(models.Model):
+    use_in_migrations = True
+    
+    id = models.AutoField(db_column='id', primary_key=True)  # Field name made lowercase.
+    dok_typ = models.CharField(max_length=20, blank=True, null=True) #Dokumententyp (Angebot, Mail, Auftrag, Rechnung, sonstige, Anmerkung )
+    dok_id =models.BigIntegerField(blank=True, null=True) # externe id (z. Bps. Kunde, Adresse, Server etc.)
+    dok_lfd =models.BigIntegerField(blank=True, null=True) # Laufende Nummer
+    pfad = models.CharField(max_length=500, blank=False, null=False) # Pfad wo die Datei liegt
+    name = models.TextField(max_length=128, blank=False, null=False) # Name der Datei
+    log_datum_vom = models.DateTimeField(blank=True, null=True)
+
+
+# Software
+# welche Software und Schnittstellen und Version auf welchem Server / WLAN / enthernet / externen Zugriff
+# Besonderheiten
+
+# Raumliste über ID verknüpfen
+ 
+# Preise
+
+# Angebote 
+
+# Aufträge
+
+# Rechnungen
+
+
         
