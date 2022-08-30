@@ -316,11 +316,16 @@ class ErgAnalyse(models.Model):
     
     id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
     messwert_id = models.BigIntegerField(blank=False, null=True) # Enthält die ID des Wertes aus ImportMesswerte
+    kunde_id = models.BigIntegerField(blank=True, null=True) # Verknüpfung mit Tabelle Kunde
+    server_id = models.BigIntegerField(blank=False, null=False) # Primär immer nach Raum sortiert, Raum aus raumliste
+    gebaeude_id  = models.BigIntegerField(blank=True, null=True) # Verknüpfung mit Tabelle Gebäude
+    etage_id  = models.BigIntegerField(blank=True, null=True) # Verknüpfung mit Tabelle Etage
     raum_id = models.BigIntegerField(blank=False, null=False) # Primär immer nach Raum sortiert, Raum aus raumliste
     periode = models.BigIntegerField(blank=False, null=False) # Fortlaufenden Nummerierung der Periode
     periode_typ = models.BigIntegerField(blank=False, null=False) # typ aus Periodentyp
     von_date_time = models.DateTimeField(blank=False, null=True) # Beginn
     bis_date_time = models.DateTimeField(blank=False, null=True) # Ende
+    geraete_id = models.BigIntegerField(blank=False, null=False) # Id des verwendeten Gerätes
     wert_typ = models.BigIntegerField(blank=False, null=False) # Typ aus kirgtypen
     tgt_val = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
     min_val = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
