@@ -1,0 +1,104 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container">
+  <div class="row">
+    <div>
+      <form id="auswertung" action="" method="post" class="form-horizontal">
+        {% csrf_token %}
+        <h2 class="form-group">1. Eckdaten der Auswertung</h2>
+          <div class="form-group">
+            <label for="ddl_server_dsp" class="text-nowrap">Welcher Server solls denn sein</label>
+            <select name="ddl_server_dsp" class="form-control">
+              <option disabled="true" selected>
+                -- Bitte einen Server wählen --
+              </option>
+              {% for ddl_server_erg in ddl_server_erg %}
+              <option value="{{ ddl_server_erg.id }}">
+              {{ ddl_server_erg.server_name }}
+            </option>
+            {% endfor %}
+          </select>
+          </div>
+          <div class="form-group">
+          <select name="ddl_etagen_dsp" class="form-control">
+            <option disabled="true" selected>
+              -- Bitte eine Etage wählen --
+            </option>
+            {% for ddl_etagen_erg in ddl_etagen_erg %}
+            <option value="{{ ddl_etagen_erg.id }}">
+              {{ ddl_etagen_erg.etage }}
+            </option>
+            {% endfor %}
+          </select>
+          </div>
+          <div class="form-group">
+          <select name="ddl_raeume_dsp" class="form-control">
+            <option disabled="true" selected>
+              -- Bitte einen Raum wählen --
+            </option>
+            {% for ddl_raeume_erg in ddl_raeume_erg %}
+            <option value="{{ ddl_raeume_erg.id }}">
+              {{ ddl_raeume_erg.raum }}
+            </option>
+            {% endfor %}
+          </select>
+          </div>
+          <div class="form-group">
+          <select name="ddl_sensorklassen_dsp" class="form-control">
+            <option disabled="true" selected>
+              -- Bitte eine Sensorklasse wählen --
+            </option>
+            {% for ddl_sensorklassen_erg in ddl_sensorklassen_erg %}
+            <option value="{{ ddl_sensorklassen_erg.id }}">
+              {{ ddl_sensorklassen_erg.name }}
+            </option>
+            {% endfor %}
+          </select>
+          </div class="form-group">
+          <div>
+          <select name="ddl_wert_dsp" class="form-control">
+            <option disabled="true" selected>
+              -- Bitte einen Wert wählen --
+            </option>
+            {% for ddl_wert_erg in ddl_wert_erg %}
+            <option value="{{ ddl_wert_erg.id }}">
+              {{ ddl_wert_erg.name }}
+            </option>
+            {% endfor %}
+          </select>
+          </div class="form-group">
+        </br>
+          <h2 class="form-group">2. Zeitraum der Auswertung</h2>
+          <div class="form-group">
+          <select name="ddl_datum_von_dsp" class="form-control">
+            <option disabled="true" selected>
+              -- Bitte ein Datum von wählen --
+            </option>
+            {% for ddl_datum_von_erg in ddl_datum_von_erg %}
+            <option value="{{ ddl_datum_von_erg.id }}">
+              {{ ddl_datum_von_erg.datum }}
+            </option>
+            {% endfor %}
+          </select>
+          </div>
+          <div class="form-group">
+            <select name="ddl_datum_bis_dsp" class="form-control">
+              <option disabled="true" selected>
+                -- Bitte ein Datum bis wählen --
+              </option>
+              {% for ddl_datum_bis_erg in ddl_Datum_bis_erg %}
+              <option value="{{ ddl_datum_bis_erg.id }}">
+                {{ ddl_datum_bis_erg.datum }}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+        <div class="form-group m">
+          <button type="submit" class="btn btn-default">Grafik anzeigen</Button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

@@ -266,8 +266,8 @@ sql_anweisung = """SELECT DISTINCT name_des_wertes FROM ki_energie_importmesswer
 a_name_des_wertes = db_select(sql_anweisung, None, "ki_energie_importmesswerte")
 cb_name_des_wertes['values'] = a_name_des_wertes
 cb_name_des_wertes.place(x=250, y=210)
-#if len(a_name_des_wertes) == 1:
-cb_name_des_wertes.current(0)
+if len(a_name_des_wertes) == 1:
+    cb_name_des_wertes.current(0)
 
 sql_anweisung = """SELECT DISTINCT DATE_FORMAT(log_datum_vom, '%Y-%m-%d') AS datum FROM ki_energie_importmesswerte
                    GROUP BY datum 
