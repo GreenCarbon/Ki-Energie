@@ -235,18 +235,14 @@ class KiRgTypen(models.Model):
     max_val = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
     log_date = models.DateTimeField(blank=True, null=True)
 
-    
-
-
-
-
-    
 
 
 class Raumliste(models.Model):
     use_in_migrations = True
     
     id = models.AutoField(db_column='Id', primary_key=True, default = 0)  # Field name made lowercase.
+    gebaeude_id  = models.BigIntegerField(blank=True, null=True) # Verknüpfung mit Tabelle Gebäude
+    etage_id  = models.BigIntegerField(blank=True, null=True) # Verknüpfung mit Tabelle Etage
     server_name = models.CharField(max_length=20, blank=True, null=True)
     etage = models.CharField(max_length=50, blank=True, null=True)
     raum = models.CharField(max_length=50, blank=True, null=True)
