@@ -78,9 +78,9 @@ WSGI_APPLICATION = 'ki_energie.wsgi.application'
 
 db_config = ""
 if os.path.exists("/Users/Ingo/Decarbonara/"):
-    db_config = '/Users/Ingo/Decarbonara/01_Workspace_GIT/01_python/ki_energie/ki_energie/my.cnf'
+    db_config = '/Users/Ingo/Decarbonara/01_Workspace_GIT/01_python/ki_energie/ki_energie/my_ingo.cnf'
 else:
-    db_config = '/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/01_python/ki_energie/ki_energie/my.cnf'
+    db_config = '/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/01_python/ki_energie/ki_energie/my_karsten.cnf'
 
 DATABASES = {
     'default': {
