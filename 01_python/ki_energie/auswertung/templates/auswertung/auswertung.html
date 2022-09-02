@@ -1,5 +1,6 @@
 {% extends 'base.html' %} {% block content %} {% load static %}
 
+
   <form name="auswertung" action="" method="post" class="form-horizontal">
     {% csrf_token %}
     <div class="container-fluid">
@@ -13,8 +14,23 @@
           </div>
           <div class="row">
             <div class="form-group col-md-2">
+
               <label for="ddl_kunde_dsp">Kunde</label>
-              <select name="ddl_kunde_dsp" class="form-control" onChange="auswertung.submit();">
+              <div class="ui selection dropdown form-control" id="ddlKunden">
+                <input type="hidden" name="inputKunden">
+                <i class="dropdown icon"></i>
+                <div class="default text">wähle einen Kunden aus</div>
+                <div class="menu" id="kunden-daten-box">
+                {% comment %} 
+                  {% for ddl_kunde_erg in ddl_kunde_erg %}
+                    <div class="item" data-value="{{ ddl_kunde_erg.id }}">{{ ddl_kunde_erg.nachname }}</div>
+                  {% endfor %}
+                {% endcomment %} 
+                </div>
+              </div>
+<!--
+              <label for="ddl_kunde_dsp">Kunde</label>
+              <select name="ddl_kunde_dsp" class="form-control" id="ddl_kunde" onchange="checkChange(this)"">
                 <option disabled="true" selected>
                   ... Bitte auswählen
                 </option>
@@ -26,7 +42,7 @@
               </select>
             </div>
           </div>
-
+-->
         {% if dsp_eckdaten %}
         
           <div class="row">

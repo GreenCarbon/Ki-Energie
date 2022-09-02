@@ -6,7 +6,7 @@ from django.shortcuts import render
 # import datetime
 # import matplotlib.pyplot as plt
 from datetime import *
-
+from django.http import JsonResponse
 from ki_energie.models import Kunde, Raumliste, Etage
 from auswertung.ASW_Messwerte import *
 
@@ -89,3 +89,15 @@ def auswertung(request):
                                                           'dsp_eckdaten': dsp_eckdaten,
                                                           'show_auswertung': dsp_auswertung
                                                           })
+
+
+def get_json_kunden_daten(request):
+    qs_values = list(Kunde.objects.values(
+        'nachname', 'id', 'vorname', 'anrede', 'titel'
+    ))
+    return JsonResponse({'data': qs_values})
+
+
+def get_jason_server_daten(request, *args, **kwargs):
+    selected_kunde = kwargs.get('kunde')
+    print(selected_kunde)
