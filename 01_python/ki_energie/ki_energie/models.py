@@ -241,20 +241,22 @@ class Raumliste(models.Model):
     use_in_migrations = True
     
     id = models.AutoField(db_column='Id', primary_key=True, default = 0)  # Field name made lowercase.
-    gebaeude_id  = models.BigIntegerField(blank=True, null=True) # Verknüpfung mit Tabelle Gebäude
-    etage_id  = models.BigIntegerField(blank=True, null=True) # Verknüpfung mit Tabelle Etage
-    server_name = models.CharField(max_length=20, blank=True, null=True)
-    etage = models.CharField(max_length=50, blank=True, null=True)
+    kunde_id = models.BigIntegerField(blank=True, null=True) # Verknüpfung mit Tabelle Kunde
     raum = models.CharField(max_length=50, blank=True, null=True)
     beschreibung = models.CharField(max_length=100, blank=True, null=True)
+    gebaeude_id  = models.BigIntegerField(blank=True, null=True) # Verknüpfung mit Tabelle Gebäude
+    etage_id  = models.BigIntegerField(blank=True, null=True) # Verknüpfung mit Tabelle Etage
+    server_id = models.BigIntegerField(blank=True, null=True) # Verknüpfung mit Tabelle Server
     wunsch_temperatur = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
     wunsch_luftfeuchte = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)
     groesse_qm = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     raumhoehe = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     anzahl_sensoren = models.SmallIntegerField(blank=True, null=True)
     nutzungsbeschreibung = models.CharField(max_length=100, blank=True, null=True)
-    log_erzeugt_am = models.DateTimeField(blank=True, null=True)
-    log_letzte_änderung_am = models.DateTimeField(blank=True, null=True)
+    comment = models.TextField(blank=True, null=True) #Kommentarfeld
+    log_datum_vom = models.DateTimeField(blank=True, null=True)
+    #log_erzeugt_am = models.DateTimeField(blank=True, null=True)
+    #log_letzte_änderung_am = models.DateTimeField(blank=True, null=True)
 
 class RaumlisteInd1(models.Model):    
     use_in_migrations = True

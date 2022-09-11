@@ -11,8 +11,8 @@ class select_Values():
 def connect_database():
     global conn
     conn = mysql.connector.connect(database='DeCarbonara',
-                                            user='root',
-                                   password='DeCarbonaras#2022')
+                                            user='decarbonara',
+                                   password='Decarbonaras#2022')
     # password = 'ia 2g 4ayh')
     return
 

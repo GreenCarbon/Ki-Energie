@@ -28,6 +28,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ki_energie.settings')
 django.setup()
 from ki_energie.models import *
 from CTL_Aktor_Sensor import *
+from ki_energie.KI_Objects import *
 # Import Anweisungen für interne Klassen & Files
 from ki_energie.INT_Classes import *
 from ki_energie.models import *
@@ -68,13 +69,23 @@ def getValueType(sensorname):
 # Primäre Schleife: Alle Messwerte lesen
 
 logdat = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+################
+# Die folgenden Definitionen müssen später durch einen externen Aufruf getätigt werden!
+################
 run_import = False
-run_analysis = True
+run_analysis = False
 run_controller = False
-
+kunde = 1
+gebauede = 1
+################
+################
 # =============================================================
 # Start der Action Controller Regelung
 # =============================================================
+
+xx = KI_Server()
+yy = xx.find_or_create_by_namefind_by_name("PI0002")
+
 if run_import:
     try:
     # Erster Durchlauf: Ermittlung der Perioden und schreiben in Erg_Analyse
@@ -87,11 +98,12 @@ if run_import:
         wp = WorkValues()
         from_id = wp.getWorkParam("Auswertung", "ImportMesswerte", "Status_id", "End" , 0)
         nbr = wp.getWorkParam("Auswertung", "ImportMesswerte", "Status_id", "Records" , 0)
-        messwerte = ImportMesswerte.objects.filter(id__gt=from_id).order_by('server_name', 'raum', 'geraete_name', 'log_datum_vom')[:nbr]
+        messwerte = ImportMesswerte.objects.filter(id__gt=from_id).order_by('server_name', 'etage', 'raum', 'geraete_name', 'log_datum_vom')[:nbr]
         first = True
         write = False
         server_name = ""
         geraete_name = ""
+        etage_name = ""
         raum = 0
         wert_bit = 0
         wert_num = 0.0
@@ -118,6 +130,7 @@ if run_import:
                 if server_name == getattr(mw, "server_name") \
                     and raum == getattr(mw, "raum") \
                     and geraete_name == getattr(mw, "geraete_name") \
+                    and etage_name == getattr(mw, "etage") \
                     and wert_bit == getattr(mw, "wert_bit") \
                     and wert_str == getattr(mw, "wert_str") \
                     and wert_num == getattr(mw, "wert_num"):
@@ -153,6 +166,7 @@ if run_import:
             raum = 0
 
             geraete_name =getattr(mw, "geraete_name")  
+            etage_name =getattr(mw, "etage")  
             wert_bit =getattr(mw, "wert_bit") 
             wert_str =getattr(mw, "wert_str") 
             wert_num =getattr(mw, "wert_num") 
