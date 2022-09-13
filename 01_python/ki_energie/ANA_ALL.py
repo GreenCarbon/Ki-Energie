@@ -72,111 +72,118 @@ logdat = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 ################
 # Die folgenden Definitionen müssen später durch einen externen Aufruf getätigt werden!
 ################
-run_import = False
+run_import = True
 run_analysis = False
 run_controller = False
-kunde = 1
-gebauede = 1
+param_kunde = 2
+param_gebaeude = 1
 ################
 ################
 # =============================================================
 # Start der Action Controller Regelung
 # =============================================================
 
-xx = KI_Server()
-yy = xx.find_or_create_by_namefind_by_name("PI0002")
-
 if run_import:
-    try:
-    # Erster Durchlauf: Ermittlung der Perioden und schreiben in Erg_Analyse
-    # Bei 2 aufeinander folgenden messwerden wird der jeweils vorhergehende eliminiert, es sei denn es handelt sich um eine Richtungsumkehr
-    # Richtungsumkehr muss innerhalb von 15 min definitiv erfolgt und durch 2 Messwerte bestätigt werden    
-        #xx = RaumlisteInd1.objects.only('raum')   
-        #for r in xx:
-        #    print(getattr(r, 'raum'))
-        erg_id = ErgAnalyse.objects.values('id')
-        wp = WorkValues()
-        from_id = wp.getWorkParam("Auswertung", "ImportMesswerte", "Status_id", "End" , 0)
-        nbr = wp.getWorkParam("Auswertung", "ImportMesswerte", "Status_id", "Records" , 0)
-        messwerte = ImportMesswerte.objects.filter(id__gt=from_id).order_by('server_name', 'etage', 'raum', 'geraete_name', 'log_datum_vom')[:nbr]
-        first = True
-        write = False
-        server_name = ""
-        geraete_name = ""
-        etage_name = ""
-        raum = 0
-        wert_bit = 0
-        wert_num = 0.0
-        wert_str = ""
-        von_datum = datetime.now()
-        # curdate = datetime.now()
-        # x = str(curdate)
-        # mwadd.von_date_time = x
-    #    print(messwerte)
-    # Nur Messwerte übertragen wo der Wert sich geändert hat.     
-        i = 0
-        lfd_id = 0
-        for mw in messwerte:
-            i+=1
-            if i==100:
-                wp.saveWorkParam("Auswertung", "ImportMesswerte", "Status_id", "End" , 0, lfd_id)
-                i= 0
-            write = False
-            if (first):
-                first = False
-                write = True
-                von_datum = getattr(mw, "log_datum_vom")
-            else:
-                if server_name == getattr(mw, "server_name") \
-                    and raum == getattr(mw, "raum") \
-                    and geraete_name == getattr(mw, "geraete_name") \
-                    and etage_name == getattr(mw, "etage") \
-                    and wert_bit == getattr(mw, "wert_bit") \
-                    and wert_str == getattr(mw, "wert_str") \
-                    and wert_num == getattr(mw, "wert_num"):
-                    write = false
-                else:
-                    write = True    
-    # Aktuelle Werte merken          
-            if write:
-                mwadd = ErgAnalyse(raum_id = 0, periode = 0 , periode_typ = 0, \
-                wert_typ = 0, tgt_val = 0, min_val = 0, max_val = 0, rise_time= 0, max_rise = 0, min_rise = 0, \
-                goodness = 0, optimum_percent = 0)
-                mwadd.messwert_id = getattr(mw, "id")
-                try:
-                    r_name = getattr(mw, "raum")
-                    rl = Raumliste.objects.get(raum = r_name)
-                except Raumliste.DoesNotExist:
-                    rl1 = Raumliste.objects.order_by('-id').first()
-                    new_id = getattr(rl1, "id") + 1
-                    logdat = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                    rl = Raumliste(id = new_id, server_name = "PI???", etage = "???", raum = getattr(mw, "raum"), beschreibung = "*AUTOMATISCHE ANLAGE!", log_erzeugt_am = logdat)
-                    rl.save()
-                mwadd.raum_id = getattr(rl, "id")
-                mwadd.wert_typ = getValueType(getattr(mw, "name_des_wertes"))
-                mwadd.von_date_time = von_datum
-                mwadd.bis_date_time = getattr(mw, "log_datum_vom")
-                mwadd.log_datum_vom = str(datetime.now())
-                mwadd.save()    
-                lfd_id = mwadd.id
-                von_datum = getattr(mw, "log_datum_vom")      
-            Id = getattr(mw, "id")  
-            server_name = getattr(mw, "server_name") 
-            #raum = getattr(mw, "raum")
-            raum = 0
 
-            geraete_name =getattr(mw, "geraete_name")  
-            etage_name =getattr(mw, "etage")  
-            wert_bit =getattr(mw, "wert_bit") 
-            wert_str =getattr(mw, "wert_str") 
-            wert_num =getattr(mw, "wert_num") 
-            #von_datum = getattr(mw, "log_datum_vom"
-    #        print(Id, " ", server_name, " ", raum, " ", geraete_name,  " ", wert_str,  " ",wert_num)
-    #--- Ende Datenübernahme, letzte ID speichern sofern etwas verarbeitet wurde.        
-        if lfd_id > 0:
+# Erster Durchlauf: Ermittlung der Perioden und schreiben in Erg_Analyse
+# Bei 2 aufeinander folgenden messwerden wird der jeweils vorhergehende eliminiert, es sei denn es handelt sich um eine Richtungsumkehr
+# Richtungsumkehr muss innerhalb von 15 min definitiv erfolgt und durch 2 Messwerte bestätigt werden    
+    #xx = RaumlisteInd1.objects.only('raum')   
+    #for r in xx:
+    #    print(getattr(r, 'raum'))
+    erg_id = ErgAnalyse.objects.values('id')
+    wp = WorkValues()
+    from_id = wp.getWorkParam("Auswertung", "ImportMesswerte", "Status_id", "End" , 0)
+    from_id = 0 #### >>>>> MUSS WIEDER RAUS!!!
+    nbr = wp.getWorkParam("Auswertung", "ImportMesswerte", "Status_id", "Records" , 0)
+    messwerte = ImportMesswerte.objects.filter(id__gt=from_id).order_by('server_name', 'etage', 'raum', 'geraete_name', 'log_datum_vom')[:nbr]
+    first = True
+    write = False
+    server_name = ""
+    geraete_name = ""
+    etage_name = ""
+    raum = 0
+    wert_bit = 0
+    wert_num = 0.0
+    wert_str = ""
+    von_datum = datetime.now()
+    # curdate = datetime.now()
+    # x = str(curdate)
+    # mwadd.von_date_time = x
+#    print(messwerte)
+# Nur Messwerte übertragen wo der Wert sich geändert hat.     
+    i = 0
+    lfd_id = 0
+    for mw in messwerte:
+        i+=1
+        if i==100:
             wp.saveWorkParam("Auswertung", "ImportMesswerte", "Status_id", "End" , 0, lfd_id)
-    except:
-        logging.error("Fehler beim Import aufgetreten!")        
+            i= 0
+        write = False
+        if (first):
+            first = False
+            write = True
+            von_datum = getattr(mw, "log_datum_vom")
+        else:
+            if server_name == getattr(mw, "server_name") \
+                and raum == getattr(mw, "raum") \
+                and geraete_name == getattr(mw, "geraete_name") \
+                and etage_name == getattr(mw, "etage") \
+                and wert_bit == getattr(mw, "wert_bit") \
+                and wert_str == getattr(mw, "wert_str") \
+                and wert_num == getattr(mw, "wert_num"):
+                write = false
+            else:
+                write = True    
+# Aktuelle Werte merken          
+        if write:
+            mwadd = ErgAnalyse(kunde_id = param_kunde, server_id = 0, gebaeude_id = param_gebaeude, etage_id = 0, raum_id = 0, periode = 0 , periode_typ = 0, \
+            wert_typ = 0, tgt_val = 0, min_val = 0, max_val = 0, rise_time= 0, max_rise = 0, min_rise = 0, \
+            goodness = 0, optimum_percent = 0)
+            mwadd.messwert_id = getattr(mw, "id")
+            #raum_id = KI_Raum().get_or_create_by_name(getattr(mw, "raum"))
+            #try:
+            #    r_name = getattr(mw, "raum")
+            #    rl = Raumliste.objects.get(raum = r_name)
+            #except Raumliste.DoesNotExist:
+            #    rl1 = Raumliste.objects.order_by('-id').first()
+            #    new_id = getattr(rl1, "id") + 1
+            #    logdat = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            #    rl = Raumliste(id = new_id, server_name = "PI???", etage = "???", raum = getattr(mw, "raum"), beschreibung = "*AUTOMATISCHE ANLAGE!", log_erzeugt_am = logdat)
+            #    rl.save()
+            etage_id = KI_Etage().get_or_create_by_name(getattr(mw, "etage"), param_gebaeude)
+            server_id = KI_Server().get_or_create_by_name(getattr(mw, "server_name"))
+            
+            mwadd.raum_id = KI_Raum().get_or_create_by_name(getattr(mw, "raum"), param_kunde, param_gebaeude, server_id, etage_id )
+            mwadd.server_id = server_id
+            mwadd.etage_id = etage_id
+            
+            xx = getattr(mw, "geraete_name")
+            mwadd.geraete_id = KI_Geraet().get_or_create_by_serialnumber(getattr(mw, "geraete_name"))
+            mwadd.wert_typ = getValueType(getattr(mw, "name_des_wertes"))
+            mwadd.von_date_time = von_datum
+            mwadd.bis_date_time = getattr(mw, "log_datum_vom")
+            mwadd.log_datum_vom = str(datetime.now())
+            mwadd.save()    
+            lfd_id = mwadd.id
+            von_datum = getattr(mw, "log_datum_vom")      
+        Id = getattr(mw, "id")  
+        server_name = getattr(mw, "server_name") 
+        #raum = getattr(mw, "raum")
+        raum = 0
+
+        geraete_name =getattr(mw, "geraete_name")  
+        etage_name =getattr(mw, "etage")  
+        wert_bit =getattr(mw, "wert_bit") 
+        wert_str =getattr(mw, "wert_str") 
+        wert_num =getattr(mw, "wert_num") 
+        #von_datum = getattr(mw, "log_datum_vom"
+#        print(Id, " ", server_name, " ", raum, " ", geraete_name,  " ", wert_str,  " ",wert_num)
+#--- Ende Datenübernahme, letzte ID speichern sofern etwas verarbeitet wurde.        
+    if lfd_id > 0:
+        wp.saveWorkParam("Auswertung", "ImportMesswerte", "Status_id", "End" , 0, lfd_id)
+#except:
+#    logging.error("Fehler beim Import aufgetreten!")        
 
 # =============================================================
 # Start der Analyse der importierten Eregbnistabelle
@@ -208,9 +215,6 @@ if run_analysis:
 #   - dazu die Anstiegs bzw. Abfallkurve ermitteln
 #   - größten und kleinsten Anstieg
 #   - bei Plateauphase niedrigste, höchsten und Mittelwert ermitteln
-
-
-                
                 if server_name == getattr(mw, "server_name") \
                     and raum == getattr(mw, "raum") \
                     and geraete_name == getattr(mw, "geraete_name") \

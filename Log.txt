@@ -1034,3 +1034,39 @@
 12:52:21,947 matplotlib.pyplot DEBUG Loaded backend macosx version unknown.
 12:53:14,532 root INFO Running Decarbonara 
 12:53:14,538 matplotlib.pyplot DEBUG Loaded backend macosx version unknown.
+15:26:19,972 root INFO Running Decarbonara 
+15:32:44,905 root INFO Running Decarbonara 
+15:34:10,527 root INFO Running Decarbonara 
+15:35:30,523 root INFO Running Decarbonara 
+15:37:15,144 root INFO Running Decarbonara 
+15:37:15,167 matplotlib.pyplot DEBUG Loaded backend macosx version unknown.
+15:38:12,901 root INFO Running Decarbonara 
+15:38:12,942 matplotlib.pyplot DEBUG Loaded backend macosx version unknown.
+15:39:05,714 root INFO Running Decarbonara 
+15:39:05,748 matplotlib.pyplot DEBUG Loaded backend macosx version unknown.
+15:39:34,45 root INFO Running Decarbonara 
+15:39:34,72 matplotlib.pyplot DEBUG Loaded backend macosx version unknown.
+15:56:43,496 root ERROR Fehler beim Import aufgetreten!
+18:55:15,234 root INFO Running Decarbonara 
+18:56:39,964 root INFO Running Decarbonara 
+19:00:29,910 matplotlib.pyplot DEBUG Loaded backend macosx version unknown.
+19:01:21,415 root INFO Running Decarbonara 
+19:05:07,271 matplotlib.pyplot DEBUG Loaded backend macosx version unknown.
+04:27:10,707 root INFO Running Decarbonara 
+04:31:12,982 matplotlib.pyplot DEBUG Loaded backend macosx version unknown.
+04:39:39,527 root INFO Running Decarbonara 
+04:43:50,318 matplotlib.pyplot DEBUG Loaded backend macosx version unknown.
+04:48:36,698 root INFO Running Decarbonara 
+04:52:44,361 matplotlib.pyplot DEBUG Loaded backend macosx version unknown.
+05:17:42,231 root INFO Running Decarbonara 
+05:21:49,360 matplotlib.pyplot DEBUG Loaded backend macosx version unknown.
+09:38:33,619 root INFO Running Decarbonara 
+09:42:24,640 matplotlib.pyplot DEBUG Loaded backend macosx version unknown.
+10:05:50,490 root INFO Running Decarbonara 
+10:09:53,151 matplotlib.pyplot DEBUG Loaded backend macosx version unknown.
+11:10:53,659 root INFO Running Decarbonara 
+11:14:54,521 matplotlib.pyplot DEBUG Loaded backend macosx version unknown.
+11:23:26,961 root INFO Running Decarbonara 
+11:27:31,569 matplotlib.pyplot DEBUG Loaded backend macosx version unknown.
+11:32:16,61 root INFO Running Decarbonara 
+11:36:21,362 matplotlib.pyplot DEBUG Loaded backend macosx version unknown.

@@ -43,7 +43,7 @@ class AuwStatkurven(models.Model):
 
 class Geraete(models.Model):
     use_in_migrations = True
-    geraete_id = models.AutoField(db_column='geraete_Id', primary_key=True)  # Field name made lowercase.
+    id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
     geraete_name = models.CharField(max_length=50, blank=True, null=True)
     geraete_art = models.CharField(max_length=50, blank=True, null=True)
     dns_name = models.CharField(max_length=60, blank=True, null=True)
@@ -56,9 +56,8 @@ class Geraete(models.Model):
     ip_port = models.CharField(max_length=5, blank=True, null=True)
     get_request = models.CharField(max_length=300, blank=True, null=True)
     put_request = models.CharField(max_length=300, blank=True, null=True)
-    bemerkung = models.CharField(max_length=100, blank=True, null=True)
-    log_erzeugt_am = models.DateTimeField(blank=True, null=True)
-    log_letzte_aenderung_am = models.DateTimeField(blank=True, null=True)
+    comment = models.TextField(blank=True, null=True) #Kommentarfeld
+    log_datum_vom = models.DateTimeField(blank=True, null=True)
 
     
 
@@ -276,8 +275,11 @@ class Adressen(models.Model):
     vorname = models.CharField(max_length=50)
     nachname = models.CharField(max_length=50)
     strasse = models.CharField(max_length=200)
+    land = models.CharField(max_length=100)
     plz = models.IntegerField()
     ort = models.CharField(max_length=100)
+    comment = models.TextField(blank=True, null=True) #Kommentarfeld
+    log_datum_vom = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         ordering = ['nachname', 'vorname']
@@ -302,8 +304,8 @@ class SensorValueTypes(models.Model):
     pri_sec = models.CharField(max_length=1, blank=True, null=True)  #P(rimary), S(econdary)
     medium = models.CharField(max_length=20, blank=True, null=True)  #Wasser, Luft, usw
     bemerkung = models.CharField(max_length=500, blank=True, null=True)
-    log_erzeugt_am = models.DateTimeField(blank=True, null=True)
-    log_letzte_aenderung_am = models.DateTimeField(blank=True, null=True)
+    comment = models.TextField(blank=True, null=True) #Kommentarfeld
+    log_datum_vom = models.DateTimeField(blank=True, null=True)
     
     class Meta:
         ordering = ['sub_kategorie', 'sub_kategorie_name']
@@ -423,6 +425,7 @@ class Adressen(models.Model):
     faxnummer = models.CharField(max_length=60, blank=True, null=True)
     mobil = models.CharField(max_length=60, blank=True, null=True)
     mail = models.CharField(max_length=128, blank=True, null=True)
+    comment = models.TextField(blank=True, null=True) #Kommentarfeld
     log_datum_vom = models.DateTimeField(blank=True, null=True)
     
     

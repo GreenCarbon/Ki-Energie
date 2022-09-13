@@ -69,3 +69,4 @@ Config.ini
 01_python/ki_energie/__pycache__/SQL_Tools.cpython-310.pyc
 *.pyc
 01_python/ki_energie/ki_energie/my.cnf
+01_python/ki_energie/ki_energie/__pycache__/models.cpython-310.pyc

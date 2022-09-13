@@ -124,25 +124,25 @@ class KI_Raum:
         
         
     # Wenn der Raum nicht existiert, wird er automatisch angelegt. Die Ergänzung der fehlenden Daten muss später nachgeholt werden    
-    def find_by_name(self, name, kunde, gebaude, server, etage): 
+    def find_by_name(self, name, kunde, gebaeude, server, etage): 
         try:
-            rl = Raumliste.objects.get(name=name, kunde_id = kunde, gebaude_id = gebaude, server_id = server, etage_id = etage)
+            rl = Raumliste.objects.get(name=name, kunde_id = kunde, gebaeude_id = gebaeude, server_id = server, etage_id = etage)
             id = getattr(rl, "id")
         except Raumliste.DoesNotExist:
             return 0
         return id
     
     # Wenn der Raum nicht existiert, wird er automatisch angelegt. Die Ergänzung der fehlenden Daten muss später nachgeholt werden
-    def get_or_create_by_name(self, name, kunde, gebaude, server, etage): 
+    def get_or_create_by_name(self, raum, kunde, gebaeude, server, etage): 
         """Trying to find the Room, if not exists, the Room will created in Table"""
         try:
-            rl = Raumliste.objects.get(name=name, kunde_id = kunde, gebaude_id = gebaude, server_id = server, etage_id = etage )
+            rl = Raumliste.objects.get(raum=raum, kunde_id = kunde, gebaeude_id = gebaeude, server_id = server, etage_id = etage )
             id = getattr(rl, "id")
         except Raumliste.DoesNotExist:
             rl1 = Raumliste.objects.order_by('-id').first()
             id = getattr(rl1, "id") + 1
             logdat = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            rl1 = Raumliste(id=id, name=name, kunde_id = kunde, gebaude_id = gebaude, server_id = server, etage_id = etage, comment="*AUTOMATISCHE ANLAGE!", log_datum_vom=logdat)
+            rl1 = Raumliste(id=id, raum=raum, kunde_id = kunde, gebaeude_id = gebaeude, server_id = server, etage_id = etage, comment="*AUTOMATISCHE ANLAGE!", log_datum_vom=logdat)
             rl1.save()
             self.raum = rl1
         return id
@@ -158,13 +158,13 @@ class KI_Raum:
         return True
 
 
-    def create(self, name, kunde, gebaude, server, etage):
+    def create(self, name, kunde, gebaeude, server, etage):
         """Create a new Room Record, return True if OK, if Not return FALSE"""
         try:
             rl1 = Raumliste.objects.order_by('-id').first()
             id = getattr(rl1, "id") + 1
             logdat = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            rl1 = Raumliste(id=id, name=name, kunde_id = kunde, gebaude_id = gebaude, server_id = server, etage_id = etage, comment="*AUTOMATISCHE ANLAGE!", log_datum_vom=logdat)
+            rl1 = Raumliste(id=id, name=name, kunde_id = kunde, gebaeude_id = gebaeude, server_id = server, etage_id = etage, comment="*AUTOMATISCHE ANLAGE!", log_datum_vom=logdat)
             rl1.save()
             self.raum = rl1
         except:
@@ -205,25 +205,25 @@ class KI_Etage:
         
         
     # Wenn die Etage nicht existiert, wird er automatisch angelegt. Die Ergänzung der fehlenden Daten muss später nachgeholt werden    
-    def find_by_name(self, name, gebaude, server, etage): 
+    def find_by_name(self, name, gebaeude, server, etage): 
         try:
-            el = Etage.objects.get(name=name, gebaude_id = gebaude, )
+            el = Etage.objects.get(name=name, gebaeude_id = gebaeude, )
             id = getattr(el, "id")
         except Etage.DoesNotExist:
             return 0
         return id
     
     # Wenn die Etage nicht existiert, wird sie automatisch angelegt. Die Ergänzung der fehlenden Daten muss später nachgeholt werden
-    def get_or_create_by_name(self, name,  gebaude): 
+    def get_or_create_by_name(self, name,  gebaeude): 
         """Trying to find the Floor, if not exists, the Floor will created in Table"""
         try:
-            el = Etage.objects.get(name=name, gebaude_id = gebaude )
-            id = getattr(wl, "id")
+            el = Etage.objects.get(name=name, gebaeude_id = gebaeude )
+            id = getattr(el, "id")
         except Etage.DoesNotExist:
             el1 = Etage.objects.order_by('-id').first()
             id = getattr(el1, "id") + 1
             logdat = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            el1 = Etage(id=id, name=name, gebaude_id = gebaude,  comment="*AUTOMATISCHE ANLAGE!", log_datum_vom=logdat)
+            el1 = Etage(id=id, name=name, gebaeude_id = gebaeude,  comment="*AUTOMATISCHE ANLAGE!", log_datum_vom=logdat)
             el1.save()
             self.etage = el1
         return id
@@ -239,13 +239,13 @@ class KI_Etage:
         return True
 
 
-    def create(self, name, gebaude):
+    def create(self, name, gebaeude):
         """Create a new Floor Record, return True if OK, if Not return FALSE"""
         try:
             el1 = Etage.objects.order_by('-id').first()
             id = getattr(el1, "id") + 1
             logdat = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            el1 = Raumliste(id=id, name=name,  gebaude_id = gebaude, comment="*AUTOMATISCHE ANLAGE!", log_datum_vom=logdat)
+            el1 = Raumliste(id=id, name=name,  gebaeude_id = gebaeude, comment="*AUTOMATISCHE ANLAGE!", log_datum_vom=logdat)
             el1.save()
             self.raum = el1
         except:
@@ -272,3 +272,102 @@ class KI_Etage:
             return getattr(rl1, "kunde_id")
         except Server.DoesNotExist:
             return 0
+        
+#-------------------------------------------------------------
+# Handling der Einträge für KI-Geraete
+# WICHTIG: In der Importdatei der Messwerte steht im Feld geraetename die Seriennummer, nicht unsere Bezeichnung !
+#-------------------------------------------------------------
+class KI_Geraet:
+    """ Class for Devices Objects Handling """
+    def __init__(self, id=0, name = "",  serialnr = '', geraet = Geraete()) :
+        self.id = id
+        self.name = name
+        self.serialnr = serialnr
+        
+        
+        
+    # Suchen nach Name    
+    def find_by_name(self, name): 
+        try:
+            el = Geraete.objects.get(geraete_name=name )
+            id = getattr(el, "id")
+        except Geraete.DoesNotExist:
+            return 0
+        return id
+    
+    # Suchen nach Seriennummer    
+    def find_by_serial(self, name): 
+        try:
+            el = Geraete.objects.get(seriennummer=name )
+            id = getattr(el, "id")
+        except Geraete.DoesNotExist:
+            return 0
+        return id
+    
+    
+    
+    # Wenn das Gerät / name nicht existiert, wird sie automatisch angelegt. Die Ergänzung der fehlenden Daten muss später nachgeholt werden
+    def get_or_create_by_name(self, name): 
+        """Trying to find the Device, if not exists, the Device will created in Table"""
+        try:
+            el = Geraete.objects.get(geraete_name=name )
+            id = getattr(el, "id")
+        except Geraete.DoesNotExist:
+            el1 = Geraete.objects.order_by('-id').first()
+            id = getattr(el1, "id") + 1
+            logdat = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            el1 = Geraete(id=id, geraete_name=name, seriennumer = "*SERIAL eintragen", comment="*AUTOMATISCHE ANLAGE!", log_datum_vom=logdat)
+            el1.save()
+            self.geraet = el1
+        return id
+    
+    # Wenn das Gerät / seriennummer nicht existiert, wird sie automatisch angelegt. Die Ergänzung der fehlenden Daten muss später nachgeholt werden
+    def get_or_create_by_serialnumber(self, name): 
+        """Trying to find the Device, if not exists, the Device will created in Table"""
+        try:
+            el = Geraete.objects.get(seriennummer=name )
+            id = getattr(el, "id")
+        except Geraete.DoesNotExist:
+            el1 = Geraete.objects.order_by('-id').first()
+            id = getattr(el1, "id") + 1
+            logdat = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            el1 = Geraete(id=id, geraete_name=name, seriennummer = name, comment="*AUTOMATISCHE ANLAGE!", log_datum_vom=logdat)
+            el1.save()
+            self.geraet = el1
+        return id
+
+    def find_by_id(self, id): #Sucht und merkt (wenn gefunden) ein Gerät per ID
+        """Search Device record by ID, return TRUE or FALSE if OK / NOT OK"""
+        
+        try:
+            el1 = Geraete.objects.get(id=id)
+            self.etage = el1
+        except Geraete.DoesNotExist:
+            return False
+        return True
+
+
+    def create(self, name, gebaeude):
+        """Create a new Device Record, return True if OK, if Not return FALSE"""
+        try:
+            el1 = Geraete.objects.order_by('-id').first()
+            id = getattr(el1, "id") + 1
+            logdat = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            el1 = Geraete(id=id, geraete_name=name, seriennummer = "*SERIAL eintragen", comment="*AUTOMATISCHE ANLAGE!", log_datum_vom=logdat)
+            el1.save()
+            self.geraet = el1
+        except:
+            return False
+        return True
+
+    
+    def get_name(self, id):
+        """Search Device record by ID, return Etage name or '' """
+        try:
+            el1 = Geraete.objects.get(id=id)
+            self.raum = el1
+            return getattr(el1, "geraete_name")
+        except Geraete.DoesNotExist:
+            return ''
+                
+
