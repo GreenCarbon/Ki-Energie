@@ -39,6 +39,7 @@ deactivate () {
 deactivate nondestructive
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 if os.path.exists(""/Users/Ingo/Decarbonara/""):
     VIRTUAL_ENV="/Users/Ingo/Decarbonara/01_Workspace_GIT/01_python/env"
     export VIRTUAL_ENV
@@ -46,6 +47,8 @@ if os.path.exists(""/Users/Ingo/Decarbonara/""):
     VIRTUAL_ENV="/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/01_python/env"
     export VIRTUAL_ENV
 =======
+=======
+>>>>>>> Stashed changes
 #VIRTUAL_ENV="/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/env"
 VIRTUAL_ENV="/Users/Ingo/Decarbonara/01_Workspace_GIT/env"
 export VIRTUAL_ENV
