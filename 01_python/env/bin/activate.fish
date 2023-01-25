@@ -30,8 +30,13 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
+<<<<<<< Updated upstream
 set -gx VIRTUAL_ENV "/Users/Ingo/Decarbonara/01_Workspace_GIT/01_python/env"
 # set -gx VIRTUAL_ENV "/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/01_python/env"
+=======
+#set -gx VIRTUAL_ENV "/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/env"
+set -gx VIRTUAL_ENV "/Users/Ingo/Decarbonara/01_Workspace_GIT/env"
+>>>>>>> Stashed changes
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
