@@ -40,8 +40,13 @@ deactivate nondestructive
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 VIRTUAL_ENV="/Users/Ingo/Decarbonara/01_Workspace_GIT/env"
 # VIRTUAL_ENV="/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/env"
+=======
+#VIRTUAL_ENV="/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/env"
+VIRTUAL_ENV="/Users/Ingo/Decarbonara/01_Workspace_GIT/env"
+>>>>>>> Stashed changes
 =======
 #VIRTUAL_ENV="/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/env"
 VIRTUAL_ENV="/Users/Ingo/Decarbonara/01_Workspace_GIT/env"

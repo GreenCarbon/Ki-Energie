@@ -32,8 +32,13 @@ deactivate nondestructive
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 set -gx VIRTUAL_ENV "/Users/Ingo/Decarbonara/01_Workspace_GIT/env"
 # set -gx VIRTUAL_ENV "/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/env"
+=======
+#set -gx VIRTUAL_ENV "/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/env"
+set -gx VIRTUAL_ENV "/Users/Ingo/Decarbonara/01_Workspace_GIT/env"
+>>>>>>> Stashed changes
 =======
 #set -gx VIRTUAL_ENV "/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/env"
 set -gx VIRTUAL_ENV "/Users/Ingo/Decarbonara/01_Workspace_GIT/env"

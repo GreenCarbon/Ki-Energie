@@ -88,9 +88,13 @@ DATABASES = {
         'OPTIONS': {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             #  'read_default_file': '/Users/Ingo/Decarbonara/01_Workspace_GIT/01_python/ki_energie/ki_energie/my.cnf',
             #  'read_default_file': '/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/01_python/ki_energie/ki_energie/my.cnf',
             'read_default_file': db_config
+=======
+            'read_default_file': '/Users/Ingo/Decarbonara/01_Workspace_GIT/01_python/ki_energie/ki_energie/my.cnf',
+>>>>>>> Stashed changes
 =======
             'read_default_file': '/Users/Ingo/Decarbonara/01_Workspace_GIT/01_python/ki_energie/ki_energie/my.cnf',
 >>>>>>> Stashed changes
