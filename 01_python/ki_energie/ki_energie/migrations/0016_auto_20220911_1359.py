@@ -10,10 +10,10 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        
+
         migrations.AlterField(
             model_name='raumliste',
             name='server_id',
-            field=models.BigIntegerField(blank=True, null=True),
+            field=models.CharField(max_length=20, blank=True, null=True),
         ),
     ]
