@@ -88,7 +88,10 @@ DATABASES = {
         'OPTIONS': {
             #  'read_default_file': '/Users/Ingo/Decarbonara/01_Workspace_GIT/01_python/ki_energie/ki_energie/my.cnf',
             #  'read_default_file': '/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/01_python/ki_energie/ki_energie/my.cnf',
-            'read_default_file': db_config
+            'read_default_file': db_config,
+            'read_default_file': '/Users/Ingo/Decarbonara/01_Workspace_GIT/01_python/ki_energie/ki_energie/my_ingo.cnf',
+            # 'read_default_file': '/Users/Ingo/Decarbonara/01_Workspace_GIT/01_python/ki_energie/ki_energie/my.cnf',
+            # 'read_default_file': '/Users/Ingo/Decarbonara/01_Workspace_GIT/01_python/ki_energie/ki_energie/my.cnf',
         }
     }
 }
