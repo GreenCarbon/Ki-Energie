@@ -70,3 +70,6 @@ Config.ini
 *.pyc
 01_python/ki_energie/ki_energie/my.cnf
 01_python/ki_energie/ki_energie/__pycache__/models.cpython-310.pyc
+01_python/.DS_Store
+01_python/.DS_Store
+01_python/env/.DS_Store

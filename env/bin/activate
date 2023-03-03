@@ -38,23 +38,8 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-VIRTUAL_ENV="/Users/Ingo/Decarbonara/01_Workspace_GIT/env"
-# VIRTUAL_ENV="/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/env"
-=======
-#VIRTUAL_ENV="/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/env"
-VIRTUAL_ENV="/Users/Ingo/Decarbonara/01_Workspace_GIT/env"
->>>>>>> Stashed changes
-=======
-#VIRTUAL_ENV="/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/env"
-VIRTUAL_ENV="/Users/Ingo/Decarbonara/01_Workspace_GIT/env"
->>>>>>> Stashed changes
-=======
-#VIRTUAL_ENV="/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/env"
-VIRTUAL_ENV="/Users/Ingo/Decarbonara/01_Workspace_GIT/env"
->>>>>>> Stashed changes
+VIRTUAL_ENV="/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/env"
+#VIRTUAL_ENV="/Users/Ingo/Decarbonara/01_Workspace_GIT/env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
