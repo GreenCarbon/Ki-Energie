@@ -38,24 +38,15 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 if os.path.exists(""/Users/Ingo/Decarbonara/""):
     VIRTUAL_ENV="/Users/Ingo/Decarbonara/01_Workspace_GIT/01_python/env"
     export VIRTUAL_ENV
  else:
     VIRTUAL_ENV="/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/01_python/env"
     export VIRTUAL_ENV
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 #VIRTUAL_ENV="/Users/Karsten/Alles/Kunden/Decarbonara/01_Workspace_GIT/env"
 VIRTUAL_ENV="/Users/Ingo/Decarbonara/01_Workspace_GIT/env"
 export VIRTUAL_ENV
->>>>>>> Stashed changes
 
 _OLD_VIRTUAL_PATH="$PATH"
 PATH="$VIRTUAL_ENV/bin:$PATH"
